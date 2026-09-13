@@ -7,6 +7,7 @@ Output: <slug>.html for each of the 100 brands, plus index.html and README.md
 import html
 import hashlib
 import os
+import re
 import webbrowser
 
 from data import SECTORS, BRANDS, slugify
@@ -243,8 +244,10 @@ def hero(brand, sector, theme, seed):
     names = rot(sector["testimonials"], 0, 3)
     avs = "".join(f'<span class="av" style="background:{rgba(sector["accent"], .16)};color:{sector["accent"]}">'
                   f'{esc("".join(w[0] for w in n.split()[:2]))}</span>' for _, n, _ in names)
-    proof = (f'<div class="proof">{avs}'
-             f'<p>Trusted by <b>{esc(sector["stats"][2][0])}</b> {esc(sector["audience"])}</p></div>')
+    ps = proof_stat(sector)
+    proof_txt = (f'Trusted by <b>{esc(ps[0])}</b> {esc(ps[1])}' if ps
+                 else f'Loved by thousands of {esc(sector["audience"])}')
+    proof = f'<div class="proof">{avs}<p>{proof_txt}</p></div>'
     text = (f'{badge}<h1>{esc(brand[2])}</h1>'
             f'<p class="lede">{esc(brand[3])}</p>{ctas}{proof}')
     m = mock_ui(brand[0], sector, theme, seed)
@@ -355,6 +358,40 @@ def sector_name(sector):
         if v is sector:
             return k
     return ""
+
+# ---------------------------------------------------------- social proof ----
+# The hero "Trusted by ..." line needs a stat that is a plausible headcount.
+# Many stat banks are percentages ("−40% conflicts") or non-counts ("HIPAA"),
+# so filter for a magnitude whose label ends in a people-ish noun.
+
+_PROOF_NOISE = {"building", "managed", "monthly", "annually", "served", "weekly",
+                "daily", "supported", "tracked", "logged", "processed", "deployed",
+                "secured", "protected", "live", "active", "signed", "paid", "found",
+                "mapped", "sold", "growing", "avg.", "average", "on", "a", "year"}
+_PROOF_PEOPLE = re.compile(
+    r"(teams?|users?|people|players|sellers|families|students|members|parents|"
+    r"customers|creators|musicians|photographers|therapists|advisors|drivers|"
+    r"farmers|builders|makers|riders|writers|artists|coaches|companies|merchants|"
+    r"clinics|homes|schools|stores|venues|shoppers|collectors|learners|growers|"
+    r"engineers|founders|chapters|distributors|operators|pilots|resellers|"
+    r"subscribers|donors|volunteers|guests|travelers|planners|owners|patients|"
+    r"events|productions|brands|jewellers|centers|marinas|plants|wallets|"
+    r"contracts|vehicles|pets|stations|properties|restaurants|trials|clinicians)$",
+    re.I)
+
+def proof_stat(sector):
+    for n, label in sector["stats"]:
+        v = n.replace(",", "").replace("+", "")
+        if v.startswith("-") or "%" in n or "★" in n:
+            continue
+        if not re.match(r"^\$?[\d.]+[kMB]?$", v):
+            continue
+        words = [w for w in re.split(r"\s+", label.strip()) if w.lower().strip(".") not in _PROOF_NOISE]
+        if not words:
+            continue
+        if _PROOF_PEOPLE.match(words[-1].lower().strip("., ")):
+            return n, " ".join(words)
+    return None
 
 # ------------------------------------------------------------------ page ----
 
@@ -1080,7 +1117,7 @@ system fonts offline).
 ## Structure
 
 - `index.html` — filterable gallery of all {len(BRANDS)} pages
-- `<brand>.html` × 200 — one landing page per product (nav, hero with fake product UI,
+- `<brand>.html` × {len(BRANDS)} — one landing page per product (nav, hero with fake product UI,
   logo strip, features, how-it-works, stats band, pricing, testimonials, FAQ, CTA, footer)
 - `data.py` — all copy: sector content banks + 100 brand entries
 - `generate.py` — theme engine + page builder

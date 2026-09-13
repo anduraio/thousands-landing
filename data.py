@@ -797,3 +797,9 @@ from data2 import EXTRA_SECTORS, EXTRA_BRANDS  # noqa: E402
 
 SECTORS.update(EXTRA_SECTORS)
 BRANDS.extend(EXTRA_BRANDS)
+
+# ---- expansion pack 3: 25 more sectors / 100 more brands (see data3.py) ----
+from data3 import EXTRA3_SECTORS, EXTRA3_BRANDS  # noqa: E402
+
+SECTORS.update(EXTRA3_SECTORS)
+BRANDS.extend(EXTRA3_BRANDS)
