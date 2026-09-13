@@ -803,3 +803,12 @@ from data3 import EXTRA3_SECTORS, EXTRA3_BRANDS  # noqa: E402
 
 SECTORS.update(EXTRA3_SECTORS)
 BRANDS.extend(EXTRA3_BRANDS)
+
+# ---- expansion pack 4+5: 50 more sectors / 200 more brands ----
+from data4 import EXTRA4_SECTORS, EXTRA4_BRANDS  # noqa: E402
+from data5 import EXTRA5_SECTORS, EXTRA5_BRANDS  # noqa: E402
+
+SECTORS.update(EXTRA4_SECTORS)
+SECTORS.update(EXTRA5_SECTORS)
+BRANDS.extend(EXTRA4_BRANDS)
+BRANDS.extend(EXTRA5_BRANDS)
