@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>100 Landing Pages — browse, search & preview templates</title>
+<meta name="description" content="A gallery of 100 handcrafted landing pages across 25 industries. Search, filter, sort and live-preview each template.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='80' font-size='80'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0a0d1a;color:#eef1fa;font-family:'Inter',system-ui,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+header.hero{padding:72px 0 36px;text-align:center;background:radial-gradient(700px 400px at 70% -10%, rgba(124,92,255,.25), transparent 65%),radial-gradient(600px 380px at 15% 0%, rgba(34,193,220,.18), transparent 65%)}
+h1{font-family:'Sora',sans-serif;font-size:clamp(2.2rem,5vw,3.4rem);margin:0 0 14px;letter-spacing:-.02em}
+.hero p{color:#98a0b8;max-width:600px;margin:0 auto}
+.pill-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.pill{border:1px solid #26304f;border-radius:999px;padding:7px 14px;font-size:.82rem;color:#b9c0d8;background:rgba(255,255,255,.03)}
+
+/* toolbar */
+.toolbar{position:sticky;top:0;z-index:60;background:rgba(10,13,26,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid #1d2440;padding:12px 0}
+.tb-in{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#q{flex:1 1 230px;min-width:170px;padding:10px 16px;border-radius:10px;border:1px solid #26304f;background:#0f1428;color:#eef1fa;font-size:.9rem;outline:none}
+#q:focus{border-color:#7c5cff}
+select{background:#0f1428;border:1px solid #26304f;color:#eef1fa;border-radius:10px;padding:10px 12px;font-size:.85rem;outline:none;cursor:pointer;max-width:180px}
+select:focus{border-color:#7c5cff}
+.seg{display:flex;border:1px solid #26304f;border-radius:10px;overflow:hidden;flex:none}
+.seg button{background:none;border:0;color:#98a0b8;padding:10px 14px;cursor:pointer;font-size:.85rem;font-weight:600}
+.seg button.on{background:#1d2440;color:#fff}
+.tot{text-align:center;color:#6f7896;font-size:.85rem;margin:16px 0 0}
+
+/* sector pills */
+.secnav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:20px 0 0}
+.secnav a{font-size:.8rem;color:#98a0b8;border:1px solid #1d2440;padding:6px 12px;border-radius:999px;cursor:pointer;transition:.15s}
+.secnav a:hover{color:#fff;border-color:#3a4573}
+.secnav a.on{color:#fff;background:#2a2550;border-color:#7c5cff}
+
+/* sections & groups */
+.grp{padding:34px 0 4px}
+.grp h2{font-family:'Sora',sans-serif;font-size:1.3rem;display:flex;align-items:center;gap:10px;margin:0 0 18px}
+.s-icon{font-size:1.15rem}
+.count{font-size:.72rem;background:#1d2440;color:#98a0b8;border-radius:999px;padding:3px 10px;font-weight:600}
+
+/* grid view */
+.pg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(262px,1fr));gap:16px;padding:24px 0 30px}
+.pg{position:relative;display:flex;flex-direction:column;gap:8px;background:#101529;border:1px solid #1d2440;border-radius:16px;padding:18px;cursor:pointer;transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;min-width:0}
+.pg:hover{transform:translateY(-3px);border-color:#4c5aa0;box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.pg-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pg-icon{width:40px;height:40px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;font-size:20px;flex:none}
+.pg-mode{display:inline-flex;align-items:center;gap:6px;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:#6f7896;font-weight:600}
+.pg-mode i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.pg h3{font-family:'Sora',sans-serif;font-size:1.05rem;margin:2px 0 0}
+.pg p{color:#98a0b8;font-size:.86rem;margin:0;flex:1}
+.chip{display:inline-flex;align-items:center;gap:6px;width:fit-content;font-size:.72rem;color:#b9c0d8;border:1px solid #1d2440;border-radius:999px;padding:3px 10px;background:rgba(255,255,255,.02)}
+.chip i{width:7px;height:7px;border-radius:50%;display:inline-block}
+.pg-actions{display:flex;gap:8px;margin-top:12px;opacity:0;transform:translateY(4px);transition:.18s}
+.pg:hover .pg-actions,.pg:focus-within .pg-actions{opacity:1;transform:none}
+@media (hover:none){.pg .pg-actions{opacity:1;transform:none}}
+.act{font-size:.78rem;font-weight:600;padding:7px 12px;border-radius:8px;cursor:pointer;border:1px solid #26304f;background:#0f1428;color:#c7cde6;display:inline-flex;align-items:center;gap:6px}
+.act:hover{border-color:#4c5aa0;color:#fff}
+.act-pv{background:#2a2550;border-color:#3a4573;color:#fff}
+
+/* list view */
+.pg-list{display:flex;flex-direction:column;gap:10px;padding:24px 0 30px}
+.pg-row{display:grid;grid-template-columns:44px minmax(0,1fr) auto auto;gap:4px 18px;align-items:center;background:#101529;border:1px solid #1d2440;border-radius:14px;padding:14px 18px;cursor:pointer;transition:border-color .15s ease,transform .15s ease;min-width:0}
+.pg-row:hover{border-color:#4c5aa0;transform:translateY(-1px)}
+.pg-row .pg-actions{margin-top:0;opacity:1;transform:none}
+.pr-body{min-width:0}
+.pr-body h3{font-family:'Sora',sans-serif;font-size:1rem;margin:0}
+.pr-body p{margin:0;color:#98a0b8;font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pr-meta{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:780px){
+  .pg-row{grid-template-columns:40px minmax(0,1fr)}
+  .pr-meta{grid-column:2;justify-content:flex-start}
+  .pg-row .pg-actions{grid-column:2}
+}
+
+/* empty state */
+#empty{display:none;text-align:center;padding:70px 0;color:#98a0b8}
+#empty button{margin-top:14px;background:#2a2550;border:1px solid #3a4573;color:#fff;border-radius:10px;padding:10px 18px;cursor:pointer;font-weight:600}
+
+/* hover live preview */
+#hover{position:fixed;z-index:80;width:340px;pointer-events:none;opacity:0;transform:translateY(8px) scale(.98);transition:opacity .18s ease,transform .18s ease}
+#hover.on{opacity:1;transform:none}
+.hv-head{display:flex;justify-content:space-between;gap:10px;font-size:.72rem;color:#98a0b8;padding:7px 12px;background:#101529;border:1px solid #26304f;border-bottom:0;border-radius:12px 12px 0 0;font-weight:600}
+.hv-frame{position:relative;height:214px;border-radius:0 0 12px 12px;overflow:hidden;border:1px solid #26304f;background:#fff;box-shadow:0 30px 70px rgba(0,0,0,.55)}
+#hoverFrame{width:1280px;height:820px;transform:scale(.2656);transform-origin:0 0;border:0;display:block}
+.spin{position:absolute;inset:0;display:none;place-items:center;color:#98a0b8;font-size:.8rem;background:#0f1428}
+@media(max-width:999px){#hover{display:none}}
+
+/* preview modal */
+#pv{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;background:rgba(5,7,16,.94)}
+#pv.open{display:flex}
+.pv-bar{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid #1d2440;background:#0a0d1a;flex-wrap:wrap}
+.pv-bar h3{margin:0;font-family:'Sora',sans-serif;font-size:1.02rem}
+#pvMeta{display:flex;gap:8px;flex-wrap:wrap}
+.pv-spacer{flex:1}
+.pv-x{background:none;border:1px solid #26304f;color:#98a0b8;border-radius:10px;padding:8px 13px;cursor:pointer;font-size:.9rem}
+.pv-x:hover{color:#fff;border-color:#4c5aa0}
+#pvStage{flex:1;position:relative;overflow:hidden;display:flex;align-items:stretch;justify-content:center;padding:14px}
+#pvFrameWrap{position:relative;overflow:hidden;border-radius:12px;border:1px solid #26304f;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+#pvFrame{position:absolute;top:0;left:0;transform-origin:0 0;border:0;display:block}
+.pv-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:44px;height:44px;border-radius:50%;border:1px solid #26304f;background:rgba(16,21,41,.9);color:#eef1fa;font-size:1.3rem;cursor:pointer;display:grid;place-items:center}
+.pv-nav:hover{border-color:#7c5cff;background:#1d2440}
+.pv-nav.prev{left:14px}.pv-nav.next{right:14px}
+.pv-hint{padding:8px 16px;text-align:center;color:#6f7896;font-size:.75rem;border-top:1px solid #1d2440;background:#0a0d1a}
+@media(max-width:720px){.pv-nav{display:none}}
+footer{border-top:1px solid #1d2440;margin-top:44px;padding:28px 0;color:#6f7896;font-size:.85rem;text-align:center}
+@media(max-width:640px){.pg-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.pg-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<h1>🚀 100 Landing Pages</h1>
+<p>One handcrafted landing page for each of 100 fictional products across 25 industries. Search, filter, sort — hover any card for a live preview, or click to open it in a device-sized viewer.</p>
+<div class="pill-row"><span class="pill">25 sectors</span><span class="pill">10 themes</span><span class="pill">🔍 search</span><span class="pill">🎛 filter & sort</span><span class="pill">⊞ grid / ☰ list</span><span class="pill">👀 live preview</span></div>
+</div></header>
+
+<div class="toolbar"><div class="wrap tb-in">
+<input id="q" type="search" placeholder="🔍 Search name, sector, headline…" aria-label="Search templates">
+<select id="fsector" aria-label="Filter by sector"><option value="">All sectors</option></select>
+<select id="ftheme" aria-label="Filter by theme"><option value="">All themes</option></select>
+<select id="fmode" aria-label="Filter by color mode"><option value="">Light & dark</option><option value="light">Light only</option><option value="dark">Dark only</option></select>
+<select id="fsort" aria-label="Sort templates">
+  <option value="sector">Sort: Sector</option>
+  <option value="az">Sort: Name A→Z</option>
+  <option value="za">Sort: Name Z→A</option>
+  <option value="theme">Sort: Theme</option>
+  <option value="shuffle">Sort: Shuffle</option>
+</select>
+<div class="seg" role="group" aria-label="View mode">
+  <button class="vw on" data-v="grid" title="Grid view">⊞</button>
+  <button class="vw" data-v="list" title="List view">☰</button>
+</div>
+</div></div>
+
+<main class="wrap">
+<p class="tot" id="tot">Showing 100 of 100 templates</p>
+<nav class="secnav" id="secnav"><a data-sector="Fintech">💳 Fintech</a><a data-sector="Healthcare">🩺 Healthcare</a><a data-sector="Education">🎓 Education</a><a data-sector="E-commerce">🛍️ E-commerce</a><a data-sector="AI &amp; Automation">🤖 AI &amp; Automation</a><a data-sector="Cybersecurity">🛡️ Cybersecurity</a><a data-sector="Real Estate">🏠 Real Estate</a><a data-sector="Food &amp; Beverage">🍜 Food &amp; Beverage</a><a data-sector="Travel">✈️ Travel</a><a data-sector="Fitness &amp; Wellness">🏋️ Fitness &amp; Wellness</a><a data-sector="Legal">⚖️ Legal</a><a data-sector="Insurance">☂️ Insurance</a><a data-sector="Automotive">🚗 Automotive</a><a data-sector="Gaming">🎮 Gaming</a><a data-sector="Media &amp; Streaming">🎬 Media &amp; Streaming</a><a data-sector="Agriculture">🌾 Agriculture</a><a data-sector="Construction">🏗️ Construction</a><a data-sector="Logistics">🚚 Logistics</a><a data-sector="HR &amp; Recruiting">🧑‍💼 HR &amp; Recruiting</a><a data-sector="Climate &amp; Energy">🌱 Climate &amp; Energy</a><a data-sector="Crypto &amp; Web3">⛓️ Crypto &amp; Web3</a><a data-sector="Marketing">📣 Marketing</a><a data-sector="Developer Tools">🛠️ Developer Tools</a><a data-sector="Hospitality">🏨 Hospitality</a><a data-sector="Pets">🐾 Pets</a></nav>
+<div id="grid"></div>
+<div id="empty"><p>😕 No templates match your search.</p><button id="clear" type="button">Clear all filters</button></div>
+</main>
+
+<div id="hover" aria-hidden="true">
+  <div class="hv-head"><span id="hoverName"></span><span>live preview · click to open</span></div>
+  <div class="hv-frame"><iframe id="hoverFrame" title="Live preview" loading="lazy" tabindex="-1"></iframe><div class="spin" id="hoverSpin">loading…</div></div>
+</div>
+
+<div id="pv" role="dialog" aria-modal="true" aria-label="Template preview">
+  <div class="pv-bar">
+    <button class="pv-nav prev" id="pvPrev" title="Previous (←)">‹</button>
+    <button class="pv-nav next" id="pvNext" title="Next (→)">›</button>
+    <h3 id="pvName"></h3>
+    <div id="pvMeta"></div>
+    <div class="pv-spacer"></div>
+    <div class="seg" role="group" aria-label="Preview device">
+      <button class="pv-dev on" data-w="1280">🖥 Desktop</button>
+      <button class="pv-dev" data-w="834">📱 Tablet</button>
+      <button class="pv-dev" data-w="414">📱 Phone</button>
+    </div>
+    <a class="act" id="pvOpen" href="#" target="_blank" rel="noopener">Open full page ↗</a>
+    <button class="pv-x" id="pvClose" title="Close (Esc)">✕</button>
+  </div>
+  <div id="pvStage">
+    <div id="pvFrameWrap"><iframe id="pvFrame" title="Template preview"></iframe><div class="spin" id="pvSpin">loading…</div></div>
+  </div>
+  <div class="pv-hint">← → to browse templates · Esc to close · click the backdrop to dismiss</div>
+</div>
+
+<footer><div class="wrap">Generated with <code>generate.py</code> · open any page directly, no server needed</div></footer>
+<noscript><p style="text-align:center;padding:20px">Enable JavaScript to browse the gallery — or open any brand page directly, e.g. <a href="ledgerly.html">ledgerly.html</a>.</p></noscript>
+<script>
+const PAGES = [{"n": "Ledgerly", "s": "ledgerly", "k": "Fintech", "h": "Bookkeeping that closes itself", "t": "aurora", "m": "light", "a": "#6d5dfc", "a2": "#22c1dc", "i": "💳"}, {"n": "Paystream", "s": "paystream", "k": "Fintech", "h": "Instant payouts for modern teams", "t": "midnight", "m": "dark", "a": "#6d5dfc", "a2": "#22c1dc", "i": "💳"}, {"n": "Vaultic", "s": "vaultic", "k": "Fintech", "h": "Bank-grade treasury for startups", "t": "editorial", "m": "light", "a": "#6d5dfc", "a2": "#22c1dc", "i": "💳"}, {"n": "Kitta", "s": "kitta", "k": "Fintech", "h": "Spend cards your team will actually love", "t": "candy", "m": "light", "a": "#6d5dfc", "a2": "#22c1dc", "i": "💳"}, {"n": "Careloop", "s": "careloop", "k": "Healthcare", "h": "Primary care that fits in your pocket", "t": "corporate", "m": "light", "a": "#0ea5a4", "a2": "#3b82f6", "i": "🩺"}, {"n": "Medscan", "s": "medscan", "k": "Healthcare", "h": "AI triage in under 60 seconds", "t": "luxe", "m": "dark", "a": "#0ea5a4", "a2": "#3b82f6", "i": "🩺"}, {"n": "Pulseboard", "s": "pulseboard", "k": "Healthcare", "h": "Remote monitoring that actually alerts", "t": "neo", "m": "light", "a": "#0ea5a4", "a2": "#3b82f6", "i": "🩺"}, {"n": "Dentia", "s": "dentia", "k": "Healthcare", "h": "Dental practices, finally paperless", "t": "glass", "m": "dark", "a": "#0ea5a4", "a2": "#3b82f6", "i": "🩺"}, {"n": "Brightpath", "s": "brightpath", "k": "Education", "h": "A personal tutor for every student", "t": "sunset", "m": "light", "a": "#f59e0b", "a2": "#8b5cf6", "i": "🎓"}, {"n": "Quizforge", "s": "quizforge", "k": "Education", "h": "Turn any PDF into a practice exam", "t": "forest", "m": "light", "a": "#f59e0b", "a2": "#8b5cf6", "i": "🎓"}, {"n": "Campusly", "s": "campusly", "k": "Education", "h": "The LMS students actually open", "t": "aurora", "m": "light", "a": "#f59e0b", "a2": "#8b5cf6", "i": "🎓"}, {"n": "Skillstack", "s": "skillstack", "k": "Education", "h": "Job-ready skills in 15 minutes a day", "t": "midnight", "m": "dark", "a": "#f59e0b", "a2": "#8b5cf6", "i": "🎓"}, {"n": "Cartloom", "s": "cartloom", "k": "E-commerce", "h": "Checkout that recovers itself", "t": "editorial", "m": "light", "a": "#ec4899", "a2": "#f97316", "i": "🛍️"}, {"n": "Shoplyft", "s": "shoplyft", "k": "E-commerce", "h": "Launch your store before lunch", "t": "candy", "m": "light", "a": "#ec4899", "a2": "#f97316", "i": "🛍️"}, {"n": "Parcelbee", "s": "parcelbee", "k": "E-commerce", "h": "Shipping rates, slashed automatically", "t": "corporate", "m": "light", "a": "#ec4899", "a2": "#f97316", "i": "🛍️"}, {"n": "Returnsy", "s": "returnsy", "k": "E-commerce", "h": "Returns your customers won't dread", "t": "luxe", "m": "dark", "a": "#ec4899", "a2": "#f97316", "i": "🛍️"}, {"n": "Promptly", "s": "promptly", "k": "AI & Automation", "h": "Ship AI features without an ML team", "t": "neo", "m": "light", "a": "#8b5cf6", "a2": "#06b6d4", "i": "🤖"}, {"n": "Copyforge", "s": "copyforge", "k": "AI & Automation", "h": "On-brand copy in every voice", "t": "glass", "m": "dark", "a": "#8b5cf6", "a2": "#06b6d4", "i": "🤖"}, {"n": "Meetkite", "s": "meetkite", "k": "AI & Automation", "h": "Meetings that write themselves", "t": "sunset", "m": "light", "a": "#8b5cf6", "a2": "#06b6d4", "i": "🤖"}, {"n": "Vectorvault", "s": "vectorvault", "k": "AI & Automation", "h": "Your knowledge, finally answerable", "t": "forest", "m": "light", "a": "#8b5cf6", "a2": "#06b6d4", "i": "🤖"}, {"n": "Watchtower", "s": "watchtower", "k": "Cybersecurity", "h": "Threats stopped before breakfast", "t": "aurora", "m": "light", "a": "#0f766e", "a2": "#22d3ee", "i": "🛡️"}, {"n": "Zerokey", "s": "zerokey", "k": "Cybersecurity", "h": "Passwordless, provably", "t": "midnight", "m": "dark", "a": "#0f766e", "a2": "#22d3ee", "i": "🛡️"}, {"n": "Redline", "s": "redline", "k": "Cybersecurity", "h": "Pen-test coverage, always on", "t": "editorial", "m": "light", "a": "#0f766e", "a2": "#22d3ee", "i": "🛡️"}, {"n": "Phishnet", "s": "phishnet", "k": "Cybersecurity", "h": "Phishing training that sticks", "t": "candy", "m": "light", "a": "#0f766e", "a2": "#22d3ee", "i": "🛡️"}, {"n": "Doorlist", "s": "doorlist", "k": "Real Estate", "h": "Rent collection on autopilot", "t": "corporate", "m": "light", "a": "#7c3aed", "a2": "#f59e0b", "i": "🏠"}, {"n": "Keyframe", "s": "keyframe", "k": "Real Estate", "h": "Virtual tours that close leases", "t": "luxe", "m": "dark", "a": "#7c3aed", "a2": "#f59e0b", "i": "🏠"}, {"n": "Tenantiq", "s": "tenantiq", "k": "Real Estate", "h": "Maintenance tickets, resolved faster", "t": "neo", "m": "light", "a": "#7c3aed", "a2": "#f59e0b", "i": "🏠"}, {"n": "Bricklane", "s": "bricklane", "k": "Real Estate", "h": "Fractional ownership of prime rentals", "t": "glass", "m": "dark", "a": "#7c3aed", "a2": "#f59e0b", "i": "🏠"}, {"n": "Orderly", "s": "orderly", "k": "Food & Beverage", "h": "QR ordering that upsells itself", "t": "sunset", "m": "light", "a": "#ef4444", "a2": "#f59e0b", "i": "🍜"}, {"n": "Fridgechef", "s": "fridgechef", "k": "Food & Beverage", "h": "Dinner, from what's already in your kitchen", "t": "forest", "m": "light", "a": "#ef4444", "a2": "#f59e0b", "i": "🍜"}, {"n": "Kitchyn", "s": "kitchyn", "k": "Food & Beverage", "h": "Ghost kitchens without the guesswork", "t": "aurora", "m": "light", "a": "#ef4444", "a2": "#f59e0b", "i": "🍜"}, {"n": "Savora", "s": "savora", "k": "Food & Beverage", "h": "Reservations, waitlists and tables in sync", "t": "midnight", "m": "dark", "a": "#ef4444", "a2": "#f59e0b", "i": "🍜"}, {"n": "Wanderly", "s": "wanderly", "k": "Travel", "h": "Trips planned in one prompt", "t": "editorial", "m": "light", "a": "#0284c7", "a2": "#f59e0b", "i": "✈️"}, {"n": "Layover", "s": "layover", "k": "Travel", "h": "Long layovers, short adventures", "t": "candy", "m": "light", "a": "#0284c7", "a2": "#f59e0b", "i": "✈️"}, {"n": "Fareloop", "s": "fareloop", "k": "Travel", "h": "Flight deals before anyone else", "t": "corporate", "m": "light", "a": "#0284c7", "a2": "#f59e0b", "i": "✈️"}, {"n": "Stayfolio", "s": "stayfolio", "k": "Travel", "h": "Vacation rentals, hotel-grade ops", "t": "luxe", "m": "dark", "a": "#0284c7", "a2": "#f59e0b", "i": "✈️"}, {"n": "Repmate", "s": "repmate", "k": "Fitness & Wellness", "h": "A coach in your earbuds", "t": "neo", "m": "light", "a": "#16a34a", "a2": "#84cc16", "i": "🏋️"}, {"n": "Zenrise", "s": "zenrise", "k": "Fitness & Wellness", "h": "Five minutes to a calmer morning", "t": "glass", "m": "dark", "a": "#16a34a", "a2": "#84cc16", "i": "🏋️"}, {"n": "Stridex", "s": "stridex", "k": "Fitness & Wellness", "h": "Running plans that adapt daily", "t": "sunset", "m": "light", "a": "#16a34a", "a2": "#84cc16", "i": "🏋️"}, {"n": "Macroly", "s": "macroly", "k": "Fitness & Wellness", "h": "Macros tracked from a photo", "t": "forest", "m": "light", "a": "#16a34a", "a2": "#84cc16", "i": "🏋️"}, {"n": "Clausesmith", "s": "clausesmith", "k": "Legal", "h": "Contracts drafted in minutes", "t": "aurora", "m": "light", "a": "#b45309", "a2": "#78350f", "i": "⚖️"}, {"n": "Docketly", "s": "docketly", "k": "Legal", "h": "Case prep without the chaos", "t": "midnight", "m": "dark", "a": "#b45309", "a2": "#78350f", "i": "⚖️"}, {"n": "Complyharbor", "s": "complyharbor", "k": "Legal", "h": "Compliance calendars that run themselves", "t": "editorial", "m": "light", "a": "#b45309", "a2": "#78350f", "i": "⚖️"}, {"n": "Notaryze", "s": "notaryze", "k": "Legal", "h": "Notarize documents from your couch", "t": "candy", "m": "light", "a": "#b45309", "a2": "#78350f", "i": "⚖️"}, {"n": "Shieldpay", "s": "shieldpay", "k": "Insurance", "h": "Claims paid in hours, not months", "t": "corporate", "m": "light", "a": "#0369a1", "a2": "#22c55e", "i": "☂️"}, {"n": "Coverly", "s": "coverly", "k": "Insurance", "h": "Insurance that reads the fine print for you", "t": "luxe", "m": "dark", "a": "#0369a1", "a2": "#22c55e", "i": "☂️"}, {"n": "Risklens", "s": "risklens", "k": "Insurance", "h": "Know your risk before it costs you", "t": "neo", "m": "light", "a": "#0369a1", "a2": "#22c55e", "i": "☂️"}, {"n": "Fleetguard", "s": "fleetguard", "k": "Insurance", "h": "Fleet coverage priced by the mile", "t": "glass", "m": "dark", "a": "#0369a1", "a2": "#22c55e", "i": "☂️"}, {"n": "Garagio", "s": "garagio", "k": "Automotive", "h": "Sell your car without the lot", "t": "sunset", "m": "light", "a": "#334155", "a2": "#f97316", "i": "🚗"}, {"n": "Fleetwise", "s": "fleetwise", "k": "Automotive", "h": "Every vehicle, one dashboard", "t": "forest", "m": "light", "a": "#334155", "a2": "#f97316", "i": "🚗"}, {"n": "Voltroute", "s": "voltroute", "k": "Automotive", "h": "EV routing that never strands you", "t": "aurora", "m": "light", "a": "#334155", "a2": "#f97316", "i": "🚗"}, {"n": "Wrenchcall", "s": "wrenchcall", "k": "Automotive", "h": "Mechanics who come to you", "t": "midnight", "m": "dark", "a": "#334155", "a2": "#f97316", "i": "🚗"}, {"n": "Questforge", "s": "questforge", "k": "Gaming", "h": "Build worlds with your friends", "t": "editorial", "m": "light", "a": "#7c3aed", "a2": "#ec4899", "i": "🎮"}, {"n": "Clashcup", "s": "clashcup", "k": "Gaming", "h": "Tournaments for everyone", "t": "candy", "m": "light", "a": "#7c3aed", "a2": "#ec4899", "i": "🎮"}, {"n": "Spritecraft", "s": "spritecraft", "k": "Gaming", "h": "Animate characters in minutes", "t": "corporate", "m": "light", "a": "#7c3aed", "a2": "#ec4899", "i": "🎮"}, {"n": "Lobbyly", "s": "lobbyly", "k": "Gaming", "h": "Never squad up alone again", "t": "luxe", "m": "dark", "a": "#7c3aed", "a2": "#ec4899", "i": "🎮"}, {"n": "Reelmind", "s": "reelmind", "k": "Media & Streaming", "h": "Every film, one subscription", "t": "neo", "m": "light", "a": "#dc2626", "a2": "#1d4ed8", "i": "🎬"}, {"n": "Podwave", "s": "podwave", "k": "Media & Streaming", "h": "Podcasts that grow themselves", "t": "glass", "m": "dark", "a": "#dc2626", "a2": "#1d4ed8", "i": "🎬"}, {"n": "Clipstream", "s": "clipstream", "k": "Media & Streaming", "h": "Turn streams into clips overnight", "t": "sunset", "m": "light", "a": "#dc2626", "a2": "#1d4ed8", "i": "🎬"}, {"n": "Wavelength", "s": "wavelength", "k": "Media & Streaming", "h": "Music for every mood, mixed live", "t": "forest", "m": "light", "a": "#dc2626", "a2": "#1d4ed8", "i": "🎬"}, {"n": "Fieldnote", "s": "fieldnote", "k": "Agriculture", "h": "Scout crops from your phone", "t": "aurora", "m": "light", "a": "#4d7c0f", "a2": "#ca8a04", "i": "🌾"}, {"n": "Harvestly", "s": "harvestly", "k": "Agriculture", "h": "Sell straight from the farm", "t": "midnight", "m": "dark", "a": "#4d7c0f", "a2": "#ca8a04", "i": "🌾"}, {"n": "Irrigo", "s": "irrigo", "k": "Agriculture", "h": "Water only where it matters", "t": "editorial", "m": "light", "a": "#4d7c0f", "a2": "#ca8a04", "i": "🌾"}, {"n": "Herdbook", "s": "herdbook", "k": "Agriculture", "h": "Livestock records, finally simple", "t": "candy", "m": "light", "a": "#4d7c0f", "a2": "#ca8a04", "i": "🌾"}, {"n": "Plancrate", "s": "plancrate", "k": "Construction", "h": "Submittals that don't stall projects", "t": "corporate", "m": "light", "a": "#ea580c", "a2": "#0891b2", "i": "🏗️"}, {"n": "SiteSync", "s": "sitesync", "k": "Construction", "h": "Every crew, one daily plan", "t": "luxe", "m": "dark", "a": "#ea580c", "a2": "#0891b2", "i": "🏗️"}, {"n": "Buildfolio", "s": "buildfolio", "k": "Construction", "h": "Track builds from dirt to keys", "t": "neo", "m": "light", "a": "#ea580c", "a2": "#0891b2", "i": "🏗️"}, {"n": "Safetybeam", "s": "safetybeam", "k": "Construction", "h": "Site safety, digitized", "t": "glass", "m": "dark", "a": "#ea580c", "a2": "#0891b2", "i": "🏗️"}, {"n": "Routebee", "s": "routebee", "k": "Logistics", "h": "Last mile, optimized hourly", "t": "sunset", "m": "light", "a": "#1d4ed8", "a2": "#0d9488", "i": "🚚"}, {"n": "Crateflow", "s": "crateflow", "k": "Logistics", "h": "Freight quotes in 90 seconds", "t": "forest", "m": "light", "a": "#1d4ed8", "a2": "#0d9488", "i": "🚚"}, {"n": "Dockside", "s": "dockside", "k": "Logistics", "h": "Warehouse slots without the emails", "t": "aurora", "m": "light", "a": "#1d4ed8", "a2": "#0d9488", "i": "🚚"}, {"n": "Freskeep", "s": "freskeep", "k": "Logistics", "h": "Cold chain you can prove", "t": "midnight", "m": "dark", "a": "#1d4ed8", "a2": "#0d9488", "i": "🚚"}, {"n": "Hirely", "s": "hirely", "k": "HR & Recruiting", "h": "Shortlists by lunchtime", "t": "editorial", "m": "light", "a": "#2563eb", "a2": "#a855f7", "i": "🧑‍💼"}, {"n": "Onboardly", "s": "onboardly", "k": "HR & Recruiting", "h": "Day one, done right", "t": "candy", "m": "light", "a": "#2563eb", "a2": "#a855f7", "i": "🧑‍💼"}, {"n": "Paycycle", "s": "paycycle", "k": "HR & Recruiting", "h": "Payroll that never misses Friday", "t": "corporate", "m": "light", "a": "#2563eb", "a2": "#a855f7", "i": "🧑‍💼"}, {"n": "Shiftly", "s": "shiftly", "k": "HR & Recruiting", "h": "Shift swaps without the group chat", "t": "luxe", "m": "dark", "a": "#2563eb", "a2": "#a855f7", "i": "🧑‍💼"}, {"n": "Solarscore", "s": "solarscore", "k": "Climate & Energy", "h": "Know your roof's solar payoff", "t": "neo", "m": "light", "a": "#15803d", "a2": "#65a30d", "i": "🌱"}, {"n": "Carbonkit", "s": "carbonkit", "k": "Climate & Energy", "h": "Measure your footprint in a day", "t": "glass", "m": "dark", "a": "#15803d", "a2": "#65a30d", "i": "🌱"}, {"n": "Wattwise", "s": "wattwise", "k": "Climate & Energy", "h": "Cut your energy bill on autopilot", "t": "sunset", "m": "light", "a": "#15803d", "a2": "#65a30d", "i": "🌱"}, {"n": "Grovefund", "s": "grovefund", "k": "Climate & Energy", "h": "Forests, funded by spare change", "t": "forest", "m": "light", "a": "#15803d", "a2": "#65a30d", "i": "🌱"}, {"n": "Blockloom", "s": "blockloom", "k": "Crypto & Web3", "h": "Self-custody, simplified", "t": "aurora", "m": "light", "a": "#b45309", "a2": "#0ea5e9", "i": "⛓️"}, {"n": "Yieldport", "s": "yieldport", "k": "Crypto & Web3", "h": "Staking across chains, one view", "t": "midnight", "m": "dark", "a": "#b45309", "a2": "#0ea5e9", "i": "⛓️"}, {"n": "Mintly", "s": "mintly", "k": "Crypto & Web3", "h": "Launch a collection this weekend", "t": "editorial", "m": "light", "a": "#b45309", "a2": "#0ea5e9", "i": "⛓️"}, {"n": "Chainproof", "s": "chainproof", "k": "Crypto & Web3", "h": "Audit-grade contract reviews", "t": "candy", "m": "light", "a": "#b45309", "a2": "#0ea5e9", "i": "⛓️"}, {"n": "Funnelio", "s": "funnelio", "k": "Marketing", "h": "Funnels that fix themselves", "t": "corporate", "m": "light", "a": "#e11d48", "a2": "#7c3aed", "i": "📣"}, {"n": "Mailbloom", "s": "mailbloom", "k": "Marketing", "h": "Email campaigns people open", "t": "luxe", "m": "dark", "a": "#e11d48", "a2": "#7c3aed", "i": "📣"}, {"n": "Postpilot", "s": "postpilot", "k": "Marketing", "h": "A month of content, one afternoon", "t": "neo", "m": "light", "a": "#e11d48", "a2": "#7c3aed", "i": "📣"}, {"n": "Referralloop", "s": "referralloop", "k": "Marketing", "h": "Turn customers into your sales team", "t": "glass", "m": "dark", "a": "#e11d48", "a2": "#7c3aed", "i": "📣"}, {"n": "Deploymint", "s": "deploymint", "k": "Developer Tools", "h": "Preview deploys for every branch", "t": "sunset", "m": "light", "a": "#4f46e5", "a2": "#0ea5e9", "i": "🛠️"}, {"n": "Queuely", "s": "queuely", "k": "Developer Tools", "h": "Background jobs without the babysitting", "t": "forest", "m": "light", "a": "#4f46e5", "a2": "#0ea5e9", "i": "🛠️"}, {"n": "Schemaflow", "s": "schemaflow", "k": "Developer Tools", "h": "Database migrations without dread", "t": "aurora", "m": "light", "a": "#4f46e5", "a2": "#0ea5e9", "i": "🛠️"}, {"n": "Tracehawk", "s": "tracehawk", "k": "Developer Tools", "h": "Find the bug before the user does", "t": "midnight", "m": "dark", "a": "#4f46e5", "a2": "#0ea5e9", "i": "🛠️"}, {"n": "Innkeep", "s": "innkeep", "k": "Hospitality", "h": "Direct bookings, fewer commissions", "t": "editorial", "m": "light", "a": "#9d174d", "a2": "#b45309", "i": "🏨"}, {"n": "Menucraft", "s": "menucraft", "k": "Hospitality", "h": "Menus that design themselves", "t": "candy", "m": "light", "a": "#9d174d", "a2": "#b45309", "i": "🏨"}, {"n": "Eventide", "s": "eventide", "k": "Hospitality", "h": "Event planning minus the spreadsheets", "t": "corporate", "m": "light", "a": "#9d174d", "a2": "#b45309", "i": "🏨"}, {"n": "Guestly", "s": "guestly", "k": "Hospitality", "h": "Five-star stays start at check-in", "t": "luxe", "m": "dark", "a": "#9d174d", "a2": "#b45309", "i": "🏨"}, {"n": "Pawtrack", "s": "pawtrack", "k": "Pets", "h": "Know where they roam", "t": "neo", "m": "light", "a": "#d97706", "a2": "#0d9488", "i": "🐾"}, {"n": "Vetnote", "s": "vetnote", "k": "Pets", "h": "Vet records in one place", "t": "glass", "m": "dark", "a": "#d97706", "a2": "#0d9488", "i": "🐾"}, {"n": "Wagpay", "s": "wagpay", "k": "Pets", "h": "Pet care subscriptions that stick", "t": "sunset", "m": "light", "a": "#d97706", "a2": "#0d9488", "i": "🐾"}, {"n": "Whiskerfeed", "s": "whiskerfeed", "k": "Pets", "h": "Meals portioned by science", "t": "forest", "m": "light", "a": "#d97706", "a2": "#0d9488", "i": "🐾"}];
+const SECTORS = [{"k": "Fintech", "i": "💳"}, {"k": "Healthcare", "i": "🩺"}, {"k": "Education", "i": "🎓"}, {"k": "E-commerce", "i": "🛍️"}, {"k": "AI & Automation", "i": "🤖"}, {"k": "Cybersecurity", "i": "🛡️"}, {"k": "Real Estate", "i": "🏠"}, {"k": "Food & Beverage", "i": "🍜"}, {"k": "Travel", "i": "✈️"}, {"k": "Fitness & Wellness", "i": "🏋️"}, {"k": "Legal", "i": "⚖️"}, {"k": "Insurance", "i": "☂️"}, {"k": "Automotive", "i": "🚗"}, {"k": "Gaming", "i": "🎮"}, {"k": "Media & Streaming", "i": "🎬"}, {"k": "Agriculture", "i": "🌾"}, {"k": "Construction", "i": "🏗️"}, {"k": "Logistics", "i": "🚚"}, {"k": "HR & Recruiting", "i": "🧑‍💼"}, {"k": "Climate & Energy", "i": "🌱"}, {"k": "Crypto & Web3", "i": "⛓️"}, {"k": "Marketing", "i": "📣"}, {"k": "Developer Tools", "i": "🛠️"}, {"k": "Hospitality", "i": "🏨"}, {"k": "Pets", "i": "🐾"}];
+const $ = s => document.querySelector(s);
+const grid = $('#grid');
+const state = { q:'', sector:'', theme:'', mode:'', sort:'sector', view:'grid' };
+let shuffleMap = null;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ---------- options ---------- */
+SECTORS.forEach(s => $('#fsector').insertAdjacentHTML('beforeend', `<option value="${esc(s.k)}">${s.i} ${esc(s.k)}</option>`));
+[...new Set(PAGES.map(p => p.t))].sort().forEach(t => $('#ftheme').insertAdjacentHTML('beforeend', `<option value="${t}">${t}</option>`));
+
+/* ---------- filtering / sorting ---------- */
+function matches(p){
+  if (state.sector && p.k !== state.sector) return false;
+  if (state.theme && p.t !== state.theme) return false;
+  if (state.mode && p.m !== state.mode) return false;
+  if (state.q){
+    const hay = (p.n + ' ' + p.k + ' ' + p.h + ' ' + p.t).toLowerCase();
+    if (!hay.includes(state.q.toLowerCase())) return false;
+  }
+  return true;
+}
+function sorted(list){
+  const s = state.sort;
+  if (s === 'az')    return [...list].sort((a,b) => a.n.localeCompare(b.n));
+  if (s === 'za')    return [...list].sort((a,b) => b.n.localeCompare(a.n));
+  if (s === 'theme') return [...list].sort((a,b) => a.t.localeCompare(b.t) || a.n.localeCompare(b.n));
+  if (s === 'shuffle'){
+    if (!shuffleMap){ shuffleMap = {}; PAGES.forEach(p => shuffleMap[p.s] = Math.random()); }
+    return [...list].sort((a,b) => shuffleMap[a.s] - shuffleMap[b.s]);
+  }
+  return list; /* data order = grouped by sector */
+}
+
+/* ---------- rendering ---------- */
+function modeDot(m){ return `<i style="background:${m === 'dark' ? '#8f7bff' : '#f4b942'}"></i>`; }
+function acts(){
+  return `<div class="pg-actions"><button class="act act-pv" type="button">Preview</button><a class="act act-open" href="#" target="_blank" rel="noopener">Open ↗</a></div>`;
+}
+function card(p){
+  if (state.view === 'list'){
+    return `<article class="pg-row" data-slug="${p.s}" data-name="${esc(p.n)}">
+      <span class="pg-icon" style="background:linear-gradient(135deg,${p.a},${p.a2})">${p.i}</span>
+      <div class="pr-body"><h3>${esc(p.n)}</h3><p>${esc(p.h)}</p></div>
+      <div class="pr-meta"><span class="chip">${esc(p.k)}</span><span class="chip">${modeDot(p.m)}${p.t}</span></div>
+      ${acts().replace('href="#"', `href="${p.s}.html"`)}
+    </article>`;
+  }
+  return `<article class="pg" data-slug="${p.s}" data-name="${esc(p.n)}">
+    <div class="pg-top">
+      <span class="pg-icon" style="background:linear-gradient(135deg,${p.a},${p.a2})">${p.i}</span>
+      <span class="pg-mode">${modeDot(p.m)}${p.t}</span>
+    </div>
+    <h3>${esc(p.n)}</h3>
+    <p>${esc(p.h)}</p>
+    <span class="chip">${esc(p.k)}</span>
+    ${acts().replace('href="#"', `href="${p.s}.html"`)}
+  </article>`;
+}
+function render(){
+  const list = sorted(PAGES.filter(matches));
+  $('#tot').textContent = `Showing ${list.length} of ${PAGES.length} templates`;
+  $('#empty').style.display = list.length ? 'none' : 'block';
+  let html = '';
+  if (state.sort === 'sector'){
+    for (const sec of SECTORS){
+      const items = list.filter(p => p.k === sec.k);
+      if (!items.length) continue;
+      html += `<section class="grp"><h2><span class="s-icon">${sec.i}</span>${esc(sec.k)}<span class="count">${items.length}</span></h2>` +
+              `<div class="${state.view === 'list' ? 'pg-list' : 'pg-grid'}">` + items.map(card).join('') + `</div></section>`;
+    }
+  } else {
+    html = `<div class="${state.view === 'list' ? 'pg-list' : 'pg-grid'}" style="padding-top:24px">` + list.map(card).join('') + `</div>`;
+  }
+  grid.innerHTML = html;
+}
+function syncPills(){
+  document.querySelectorAll('#secnav a').forEach(a => a.classList.toggle('on', a.dataset.sector === state.sector));
+}
+
+/* ---------- hover live preview ---------- */
+const hov = $('#hover'), hovFrame = $('#hoverFrame'), hovSpin = $('#hoverSpin');
+let hovSlug = null, hovTimer = null;
+function showHover(el){
+  const slug = el.dataset.slug;
+  clearTimeout(hovTimer);
+  hovTimer = setTimeout(() => {
+    if (hovSlug !== slug){
+      hovSpin.style.display = 'grid';
+      hovFrame.src = slug + '.html';
+      $('#hoverName').textContent = el.dataset.name;
+      hovSlug = slug;
+    }
+    const r = el.getBoundingClientRect(), W = 340, H = 250;
+    let x = r.right + 16;
+    if (x + W > innerWidth - 8) x = r.left - W - 16;
+    x = Math.max(8, Math.min(x, innerWidth - W - 8));
+    const y = Math.max(64, Math.min(r.top - 8, innerHeight - H - 12));
+    hov.style.left = x + 'px'; hov.style.top = y + 'px';
+    hov.classList.add('on');
+  }, 200);
+}
+function hideHover(){
+  clearTimeout(hovTimer);
+  hovTimer = setTimeout(() => hov.classList.remove('on'), 120);
+}
+hovFrame.addEventListener('load', () => { hovSpin.style.display = 'none'; });
+
+/* ---------- preview modal ---------- */
+const pv = $('#pv'), pvFrame = $('#pvFrame'), pvStage = $('#pvStage'), pvWrap = $('#pvFrameWrap');
+let pvList = [], pvIdx = -1, pvW = 1280;
+function currentList(){ return sorted(PAGES.filter(matches)); }
+function openPv(slug){
+  pvList = currentList();
+  pvIdx = Math.max(0, pvList.findIndex(p => p.s === slug));
+  pv.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  loadPv();
+}
+function loadPv(){
+  const p = pvList[pvIdx]; if (!p) return;
+  $('#pvName').textContent = p.n;
+  $('#pvMeta').innerHTML = `<span class="chip">${esc(p.k)}</span><span class="chip">${modeDot(p.m)}${p.t}</span>`;
+  $('#pvOpen').href = p.s + '.html';
+  $('#pvSpin').style.display = 'grid';
+  pvFrame.src = p.s + '.html';
+  if (location.hash !== '#preview=' + p.s) location.hash = 'preview=' + p.s;
+  fitPv();
+}
+function stepPv(d){
+  if (!pvList.length) return;
+  pvIdx = (pvIdx + d + pvList.length) % pvList.length;
+  loadPv();
+}
+function closePv(){
+  if (!pv.classList.contains('open')) return;
+  pv.classList.remove('open');
+  document.body.style.overflow = '';
+  pvFrame.src = 'about:blank';
+  if (location.hash.indexOf('preview=') === 0) location.hash = '';
+}
+function setDevice(w){
+  pvW = w;
+  document.querySelectorAll('.pv-dev').forEach(b => b.classList.toggle('on', +b.dataset.w === w));
+  fitPv();
+}
+function fitPv(){
+  if (!pv.classList.contains('open')) return;
+  const avail = pvStage.clientWidth - 28, h = pvStage.clientHeight - 28;
+  const s = Math.min(1, avail / pvW);
+  pvWrap.style.width = Math.round(pvW * s) + 'px';
+  pvWrap.style.height = h + 'px';
+  pvFrame.style.width = pvW + 'px';
+  pvFrame.style.height = Math.round(h / s) + 'px';
+  pvFrame.style.transform = 'scale(' + s + ')';
+}
+pvFrame.addEventListener('load', () => { $('#pvSpin').style.display = 'none'; });
+addEventListener('resize', fitPv);
+
+/* ---------- events ---------- */
+grid.addEventListener('click', e => {
+  const el = e.target.closest('[data-slug]'); if (!el) return;
+  if (e.target.closest('.act-open')) return; /* native link */
+  e.preventDefault();
+  if (e.target.closest('.pg-mode,.chip')){
+    const p = PAGES.find(x => x.s === el.dataset.slug);
+    if (p && e.target.closest('.pg-mode')){ state.theme = p.t; $('#ftheme').value = p.t; render(); return; }
+  }
+  openPv(el.dataset.slug);
+});
+grid.addEventListener('mouseover', e => {
+  const el = e.target.closest('[data-slug]');
+  if (!el || matchMedia('(hover: none)').matches || innerWidth < 1000) return;
+  showHover(el);
+});
+grid.addEventListener('mouseout', e => { if (e.target.closest('[data-slug]')) hideHover(); });
+$('#q').addEventListener('input', e => { state.q = e.target.value.trim(); render(); });
+$('#fsector').addEventListener('change', e => { state.sector = e.target.value; syncPills(); render(); });
+$('#ftheme').addEventListener('change', e => { state.theme = e.target.value; render(); });
+$('#fmode').addEventListener('change', e => { state.mode = e.target.value; render(); });
+$('#fsort').addEventListener('change', e => { state.sort = e.target.value; render(); });
+document.querySelectorAll('.vw').forEach(b => b.addEventListener('click', () => setView(b.dataset.v)));
+$('#clear').addEventListener('click', () => {
+  state.q = state.sector = state.theme = state.mode = '';
+  $('#q').value = ''; $('#fsector').value = ''; $('#ftheme').value = ''; $('#fmode').value = '';
+  syncPills(); render();
+});
+$('#secnav').addEventListener('click', e => {
+  const a = e.target.closest('a[data-sector]'); if (!a) return;
+  e.preventDefault();
+  state.sector = (state.sector === a.dataset.sector) ? '' : a.dataset.sector;
+  $('#fsector').value = state.sector;
+  syncPills(); render();
+  scrollTo({ top: 0, behavior: 'smooth' });
+});
+document.querySelectorAll('.pv-dev').forEach(b => b.addEventListener('click', () => setDevice(+b.dataset.w)));
+$('#pvClose').addEventListener('click', closePv);
+$('#pvPrev').addEventListener('click', () => stepPv(-1));
+$('#pvNext').addEventListener('click', () => stepPv(1));
+pv.addEventListener('click', e => { if (e.target === pv || e.target === pvStage) closePv(); });
+addEventListener('keydown', e => {
+  if (e.key === 'Escape') closePv();
+  if (!pv.classList.contains('open')) return;
+  if (e.key === 'ArrowRight') stepPv(1);
+  if (e.key === 'ArrowLeft') stepPv(-1);
+});
+
+/* ---------- view + hash routing ---------- */
+function setView(v){
+  state.view = (v === 'list') ? 'list' : 'grid';
+  document.querySelectorAll('.vw').forEach(b => b.classList.toggle('on', b.dataset.v === state.view));
+  render();
+}
+function applyHash(){
+  const params = new URLSearchParams(location.hash.slice(1));
+  if (params.get('view') && params.get('view') !== state.view) setView(params.get('view'));
+  const pre = params.get('preview');
+  if (pre){ if (!pv.classList.contains('open')) openPv(pre); }
+  else closePv();
+}
+addEventListener('hashchange', applyHash);
+
+render();
+syncPills();
+applyHash();
+</script>
+</body>
+</html>
