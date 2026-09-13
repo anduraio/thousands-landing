@@ -108,6 +108,64 @@ THEMES = [
          .feat-icon{border-radius:58% 42% 55% 45%/48% 55% 45% 52%!important}
          .badge{background:color-mix(in srgb, var(--accent) 10%, #fff)}
          """),
+    dict(name="swiss", head="Archivo", body="Inter", mode="light",
+         bg="#ffffff", surface="#f7f7f7", fg="#0a0a0a", muted="#525252", border="#e5e5e5",
+         radius="2px", btn="2px", shadow="0 1px 0 rgba(0,0,0,.08)",
+         hero="split", feats="cards", extra="""
+         .nav{border-bottom:2.5px solid var(--fg)}
+         h1{text-transform:uppercase;letter-spacing:-.03em}
+         h2{text-transform:uppercase}
+         .kicker{text-transform:uppercase;letter-spacing:.2em}
+         .badge{border:1.5px solid var(--fg);background:#fff;color:var(--fg)}
+         .hero h1{font-weight:800}
+         section{border-top:2.5px solid var(--fg)}
+         .cta-band{border-radius:0;border:2.5px solid var(--fg);box-shadow:8px 8px 0 var(--fg)}
+         .cta-band .btn-primary{background:#fff;color:#0a0a0a}
+         """),
+    dict(name="retro", head="DM Serif Display", body="Karla", mode="light",
+         bg="#fdf6ec", surface="#ffffff", fg="#292018", muted="#7a6a58", border="#eadcc8",
+         radius="14px", btn="999px", shadow="0 2px 0 rgba(120,90,40,.12), 0 14px 34px rgba(120,90,40,.12)",
+         hero="center", feats="cards", extra="""
+         body{background:
+           radial-gradient(560px 340px at 10% -4%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 65%),
+           radial-gradient(620px 380px at 92% 4%, color-mix(in srgb, var(--accent2) 12%, transparent), transparent 65%),
+           var(--bg)}
+         .badge{border:1.5px dashed color-mix(in srgb, var(--accent) 60%, transparent)}
+         .btn-primary{box-shadow:0 3px 0 color-mix(in srgb, var(--accent) 60%, #00000022)}
+         .btn-primary:hover{transform:translateY(1px)}
+         """),
+    dict(name="sakura", head="Zen Maru Gothic", body="Zen Maru Gothic", mode="light",
+         bg="#fff5f7", surface="#ffffff", fg="#43302e", muted="#9b8286", border="#f7e3e8",
+         radius="24px", btn="999px", shadow="0 2px 4px rgba(190,110,140,.08), 0 16px 40px rgba(190,110,140,.12)",
+         hero="center", feats="tiles", extra="""
+         body{background:
+           radial-gradient(540px 340px at 12% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 66%),
+           radial-gradient(600px 360px at 90% 8%, color-mix(in srgb, var(--accent2) 9%, transparent), transparent 66%),
+           var(--bg)}
+         .feat-icon{border-radius:60% 40% 55% 45%/50% 60% 40% 50%!important}
+         .cta-band{background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 85%,#fff),color-mix(in srgb,var(--accent2) 85%,#fff))}
+         """),
+    dict(name="arctic", head="Manrope", body="Inter", mode="light",
+         bg="#f2f7fa", surface="#ffffff", fg="#0c2231", muted="#56718a", border="#dbe8f0",
+         radius="12px", btn="10px", shadow="0 2px 3px rgba(12,60,90,.06), 0 16px 40px rgba(12,60,90,.10)",
+         hero="center", feats="cards", extra="""
+         body{background:linear-gradient(180deg,#eaf3f9 0%, var(--bg) 30%), var(--bg)}
+         .nav{border-bottom:1.5px solid var(--border)}
+         .hero h1{letter-spacing:-.03em}
+         .badge{background:#fff}
+         .stat-band{background:linear-gradient(120deg,#eaf3f9,#f5f0ea)}
+         """),
+    dict(name="carbon", head="Chakra Petch", body="Inter", mode="dark",
+         bg="#131316", surface="#1d1d21", fg="#f4f4f5", muted="#a1a1aa", border="#3f3f46",
+         radius="8px", btn="6px", shadow="0 20px 50px rgba(0,0,0,.5)",
+         hero="split", feats="cards", extra="""
+         body{background:linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px) 0 0/100% 40px,
+              linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px) 0 0/40px 100%, var(--bg)}
+         .nav{border-bottom:2px solid var(--accent)}
+         .kicker{letter-spacing:.2em}
+         .btn-primary{clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+         .stat b{font-family:var(--font-head)}
+         """),
 ]
 
 # ------------------------------------------------------------- helpers ------
@@ -899,7 +957,7 @@ INDEX_TMPL = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>100 Landing Pages — browse, search & preview templates</title>
+<title>__TOTAL__ Landing Pages — browse, search & preview templates</title>
 <meta name="description" content="A gallery of 100 handcrafted landing pages across 25 industries. Search, filter, sort and live-preview each template.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='80' font-size='80'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -908,9 +966,9 @@ INDEX_TMPL = """<!DOCTYPE html>
 </head>
 <body>
 <header class="hero"><div class="wrap">
-<h1>🚀 100 Landing Pages</h1>
-<p>One handcrafted landing page for each of 100 fictional products across 25 industries. Search, filter, sort — hover any card for a live preview, or click to open it in a device-sized viewer.</p>
-<div class="pill-row"><span class="pill">25 sectors</span><span class="pill">10 themes</span><span class="pill">🔍 search</span><span class="pill">🎛 filter & sort</span><span class="pill">⊞ grid / ☰ list</span><span class="pill">👀 live preview</span></div>
+<h1>🚀 __TOTAL__ Landing Pages</h1>
+<p>One handcrafted landing page for each of __TOTAL__ fictional products across __SECTORS_N__ industries. Search, filter, sort — hover any card for a live preview, or click to open it in a device-sized viewer.</p>
+<div class="pill-row"><span class="pill">__SECTORS_N__ sectors</span><span class="pill">__THEMES_N__ themes</span><span class="pill">🔍 search</span><span class="pill">🎛 filter & sort</span><span class="pill">⊞ grid / ☰ list</span><span class="pill">👀 live preview</span></div>
 </div></header>
 
 <div class="toolbar"><div class="wrap tb-in">
@@ -932,7 +990,7 @@ INDEX_TMPL = """<!DOCTYPE html>
 </div></div>
 
 <main class="wrap">
-<p class="tot" id="tot">Showing 100 of 100 templates</p>
+<p class="tot" id="tot"></p>
 <nav class="secnav" id="secnav">__SECNAV__</nav>
 <div id="grid"></div>
 <div id="empty"><p>😕 No templates match your search.</p><button id="clear" type="button">Clear all filters</button></div>
@@ -985,6 +1043,9 @@ def build_index():
     secnav = "".join(
         f'<a data-sector="{esc(k)}">{v["icon"]} {esc(k)}</a>' for k, v in SECTORS.items())
     doc = (INDEX_TMPL
+           .replace("__TOTAL__", str(len(BRANDS)))
+           .replace("__SECTORS_N__", str(len(SECTORS)))
+           .replace("__THEMES_N__", str(len(THEMES)))
            .replace("__INDEX_CSS__", INDEX_CSS)
            .replace("__INDEX_JS__", INDEX_JS)
            .replace("__PAGES__", json.dumps(pages, ensure_ascii=False))
@@ -994,10 +1055,10 @@ def build_index():
         f.write(doc)
 
 def write_readme():
-    md = """# 100 Landing Pages
+    md = f"""# {len(BRANDS)} Landing Pages
 
-100 standalone, self-contained landing pages for fictional products across **25 sectors**
-(4 products each), rendered in **10 rotating visual themes**.
+{len(BRANDS)} standalone, self-contained landing pages for fictional products across **{len(SECTORS)} sectors**
+(4 products each), rendered in **{len(THEMES)} rotating visual themes**.
 
 ## Browse
 
@@ -1018,8 +1079,8 @@ system fonts offline).
 
 ## Structure
 
-- `index.html` — filterable gallery of all 100 pages
-- `<brand>.html` × 100 — one landing page per product (nav, hero with fake product UI,
+- `index.html` — filterable gallery of all {len(BRANDS)} pages
+- `<brand>.html` × 200 — one landing page per product (nav, hero with fake product UI,
   logo strip, features, how-it-works, stats band, pricing, testimonials, FAQ, CTA, footer)
 - `data.py` — all copy: sector content banks + 100 brand entries
 - `generate.py` — theme engine + page builder

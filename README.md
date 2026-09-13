@@ -1,7 +1,7 @@
-# 100 Landing Pages
+# 200 Landing Pages
 
-100 standalone, self-contained landing pages for fictional products across **25 sectors**
-(4 products each), rendered in **10 rotating visual themes**.
+200 standalone, self-contained landing pages for fictional products across **50 sectors**
+(4 products each), rendered in **15 rotating visual themes**.
 
 ## Browse
 
@@ -22,8 +22,8 @@ system fonts offline).
 
 ## Structure
 
-- `index.html` — filterable gallery of all 100 pages
-- `<brand>.html` × 100 — one landing page per product (nav, hero with fake product UI,
+- `index.html` — filterable gallery of all 200 pages
+- `<brand>.html` × 200 — one landing page per product (nav, hero with fake product UI,
   logo strip, features, how-it-works, stats band, pricing, testimonials, FAQ, CTA, footer)
 - `data.py` — all copy: sector content banks + 100 brand entries
 - `generate.py` — theme engine + page builder

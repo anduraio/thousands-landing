@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 100 100&#x27;&gt;&lt;rect width=&#x27;100&#x27; height=&#x27;100&#x27; rx=&#x27;22&#x27; fill=&#x27;#111&#x27;/&gt;&lt;text x=&#x27;50&#x27; y=&#x27;68&#x27; font-size=&#x27;56&#x27; text-anchor=&#x27;middle&#x27;&gt;📣&lt;/text&gt;&lt;/svg&gt;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400;500;600;700;800&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -188,19 +188,21 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:color-m
 }
 
   :root {
-    --bg:#fdfdf6; --surface:#ffffff; --fg:#111111;
-    --muted:#4c4c46; --border:#111111;
+    --bg:#fdf6ec; --surface:#ffffff; --fg:#292018;
+    --muted:#7a6a58; --border:#eadcc8;
     --accent:#e11d48; --accent2:#7c3aed;
-    --radius:0px; --btn-radius:0px;
-    --shadow:6px 6px 0 #111111;
-    --font-head:'Archivo Black', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-    --font-body:'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --radius:14px; --btn-radius:999px;
+    --shadow:0 2px 0 rgba(120,90,40,.12), 0 14px 34px rgba(120,90,40,.12);
+    --font-head:'DM Serif Display', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body:'Karla', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   }
-         .card,.btn,.mock,.plan,.stat-band{border:2.5px solid var(--border)!important;box-shadow:var(--shadow)!important}
-         .btn-primary{background:var(--accent);color:#fff}
-         .kicker{text-transform:uppercase;letter-spacing:.12em}
-         .badge{border:2.5px solid var(--border);box-shadow:4px 4px 0 #111}
-         h1{text-transform:uppercase;letter-spacing:-.01em}
+         body{background:
+           radial-gradient(560px 340px at 10% -4%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 65%),
+           radial-gradient(620px 380px at 92% 4%, color-mix(in srgb, var(--accent2) 12%, transparent), transparent 65%),
+           var(--bg)}
+         .badge{border:1.5px dashed color-mix(in srgb, var(--accent) 60%, transparent)}
+         .btn-primary{box-shadow:0 3px 0 color-mix(in srgb, var(--accent) 60%, #00000022)}
+         .btn-primary:hover{transform:translateY(1px)}
          </style>
 </head>
 <body>
@@ -216,7 +218,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:color-m
       </div>
     </div>
   </nav>
-<header class="hero split"><div class="wrap hero-grid"><div class="hero-copy"><span class="badge">📣 Built for growth teams</span><h1>A month of content, one afternoon</h1><p class="lede">Plan, draft and schedule 30 on-brand posts across every channel.</p><div class="cta-row"><a class="btn btn-primary btn-lg" href="#cta">Start free</a><a class="btn btn-ghost btn-lg" href="#features">See how it works →</a></div><div class="proof"><span class="av" style="background:rgba(225,29,72,0.16);color:#e11d48">ZC</span><span class="av" style="background:rgba(225,29,72,0.16);color:#e11d48">HL</span><span class="av" style="background:rgba(225,29,72,0.16);color:#e11d48">WZ</span><p>Trusted by <b>5 hrs</b> growth teams</p></div></div><div class="hero-visual">
+<header class="hero"><div class="wrap hero-center"><span class="badge">📣 Built for growth teams</span><h1>A month of content, one afternoon</h1><p class="lede">Plan, draft and schedule 30 on-brand posts across every channel.</p><div class="cta-row"><a class="btn btn-primary btn-lg" href="#cta">Start free</a><a class="btn btn-ghost btn-lg" href="#features">See how it works →</a></div><div class="proof"><span class="av" style="background:rgba(225,29,72,0.16);color:#e11d48">ZC</span><span class="av" style="background:rgba(225,29,72,0.16);color:#e11d48">HL</span><span class="av" style="background:rgba(225,29,72,0.16);color:#e11d48">WZ</span><p>Trusted by <b>5 hrs</b> growth teams</p></div><div class="hero-visual hero-visual-center">
     <div class="mock" aria-hidden="true">
       <div class="mk-bar"><i></i><i></i><i></i><span>Postpilot · live</span></div>
       <div class="mk-body">

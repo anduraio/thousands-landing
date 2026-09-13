@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 100 100&#x27;&gt;&lt;rect width=&#x27;100&#x27; height=&#x27;100&#x27; rx=&#x27;22&#x27; fill=&#x27;#111&#x27;/&gt;&lt;text x=&#x27;50&#x27; y=&#x27;68&#x27; font-size=&#x27;56&#x27; text-anchor=&#x27;middle&#x27;&gt;☂️&lt;/text&gt;&lt;/svg&gt;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -188,18 +188,19 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:color-m
 }
 
   :root {
-    --bg:#141210; --surface:#1e1a16; --fg:#f4efe6;
-    --muted:#a89e8e; --border:#332c23;
+    --bg:#f6f7fc; --surface:#ffffff; --fg:#101322;
+    --muted:#5b6172; --border:#e4e7f0;
     --accent:#0369a1; --accent2:#22c55e;
-    --radius:4px; --btn-radius:2px;
-    --shadow:0 24px 60px rgba(0,0,0,.5);
-    --font-head:'Playfair Display', ui-serif, Georgia, serif;
-    --font-body:'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --radius:20px; --btn-radius:999px;
+    --shadow:0 1px 2px rgba(18,22,40,.05), 0 10px 30px rgba(18,22,40,.06);
+    --font-head:'Sora', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body:'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   }
-         .badge{border:1px solid color-mix(in srgb, var(--accent) 45%, transparent);color:var(--fg);background:transparent}
-         .hero h1{font-weight:500}
-         .plan.featured{border:1px solid color-mix(in srgb, var(--accent) 55%, transparent)}
-         section{border-top:1px solid var(--border)}
+         body{background:
+           radial-gradient(720px 420px at 12% -4%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 68%),
+           radial-gradient(760px 460px at 88% 2%, color-mix(in srgb, var(--accent2) 15%, transparent), transparent 70%),
+           var(--bg);}
+         .mock{box-shadow:0 30px 70px rgba(18,22,40,.14)}
          </style>
 </head>
 <body>

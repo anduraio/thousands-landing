@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 100 100&#x27;&gt;&lt;rect width=&#x27;100&#x27; height=&#x27;100&#x27; rx=&#x27;22&#x27; fill=&#x27;#111&#x27;/&gt;&lt;text x=&#x27;50&#x27; y=&#x27;68&#x27; font-size=&#x27;56&#x27; text-anchor=&#x27;middle&#x27;&gt;🎬&lt;/text&gt;&lt;/svg&gt;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -188,17 +188,20 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:color-m
 }
 
   :root {
-    --bg:#f1f6ee; --surface:#ffffff; --fg:#17251a;
-    --muted:#5c6f5e; --border:#dbe6d8;
+    --bg:#131316; --surface:#1d1d21; --fg:#f4f4f5;
+    --muted:#a1a1aa; --border:#3f3f46;
     --accent:#dc2626; --accent2:#1d4ed8;
-    --radius:18px; --btn-radius:10px;
-    --shadow:0 2px 3px rgba(30,60,35,.05), 0 14px 34px rgba(30,60,35,.08);
-    --font-head:'Lora', ui-serif, Georgia, serif;
+    --radius:8px; --btn-radius:6px;
+    --shadow:0 20px 50px rgba(0,0,0,.5);
+    --font-head:'Chakra Petch', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
     --font-body:'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   }
-         body{background:radial-gradient(700px 420px at 90% -8%, color-mix(in srgb, var(--accent2) 18%, transparent), transparent 66%), var(--bg)}
-         .feat-icon{border-radius:58% 42% 55% 45%/48% 55% 45% 52%!important}
-         .badge{background:color-mix(in srgb, var(--accent) 10%, #fff)}
+         body{background:linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px) 0 0/100% 40px,
+              linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px) 0 0/40px 100%, var(--bg)}
+         .nav{border-bottom:2px solid var(--accent)}
+         .kicker{letter-spacing:.2em}
+         .btn-primary{clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+         .stat b{font-family:var(--font-head)}
          </style>
 </head>
 <body>
@@ -214,7 +217,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:color-m
       </div>
     </div>
   </nav>
-<header class="hero"><div class="wrap hero-center"><span class="badge">🎬 Built for creators &amp; fans</span><h1>Music for every mood, mixed live</h1><p class="lede">Adaptive mixes that shift with your heart rate, calendar and time of day.</p><div class="cta-row"><a class="btn btn-primary btn-lg" href="#cta">Start free</a><a class="btn btn-ghost btn-lg" href="#features">See how it works →</a></div><div class="proof"><span class="av" style="background:rgba(220,38,38,0.16);color:#dc2626">RT</span><span class="av" style="background:rgba(220,38,38,0.16);color:#dc2626">AD</span><span class="av" style="background:rgba(220,38,38,0.16);color:#dc2626">SM</span><p>Trusted by <b>&lt;2 s</b> creators &amp; fans</p></div><div class="hero-visual hero-visual-center">
+<header class="hero split"><div class="wrap hero-grid"><div class="hero-copy"><span class="badge">🎬 Built for creators &amp; fans</span><h1>Music for every mood, mixed live</h1><p class="lede">Adaptive mixes that shift with your heart rate, calendar and time of day.</p><div class="cta-row"><a class="btn btn-primary btn-lg" href="#cta">Start free</a><a class="btn btn-ghost btn-lg" href="#features">See how it works →</a></div><div class="proof"><span class="av" style="background:rgba(220,38,38,0.16);color:#dc2626">RT</span><span class="av" style="background:rgba(220,38,38,0.16);color:#dc2626">AD</span><span class="av" style="background:rgba(220,38,38,0.16);color:#dc2626">SM</span><p>Trusted by <b>&lt;2 s</b> creators &amp; fans</p></div></div><div class="hero-visual">
     <div class="mock" aria-hidden="true">
       <div class="mk-bar"><i></i><i></i><i></i><span>Wavelength · live</span></div>
       <div class="mk-body">

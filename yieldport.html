@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 100 100&#x27;&gt;&lt;rect width=&#x27;100&#x27; height=&#x27;100&#x27; rx=&#x27;22&#x27; fill=&#x27;#111&#x27;/&gt;&lt;text x=&#x27;50&#x27; y=&#x27;68&#x27; font-size=&#x27;56&#x27; text-anchor=&#x27;middle&#x27;&gt;⛓️&lt;/text&gt;&lt;/svg&gt;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -188,17 +188,19 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:color-m
 }
 
   :root {
-    --bg:#0b0f1d; --surface:#121829; --fg:#eef1fa;
-    --muted:#98a0b8; --border:#232c47;
+    --bg:#fdfdf6; --surface:#ffffff; --fg:#111111;
+    --muted:#4c4c46; --border:#111111;
     --accent:#b45309; --accent2:#0ea5e9;
-    --radius:16px; --btn-radius:12px;
-    --shadow:0 20px 50px rgba(0,0,0,.45);
-    --font-head:'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-    --font-body:'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --radius:0px; --btn-radius:0px;
+    --shadow:6px 6px 0 #111111;
+    --font-head:'Archivo Black', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body:'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   }
-         body{background:radial-gradient(900px 500px at 85% -10%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 70%), var(--bg);}
-         .hero h1{background:linear-gradient(92deg,var(--fg),color-mix(in srgb, var(--accent) 55%, var(--fg)) 70%, var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-         .btn-primary{box-shadow:0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent), 0 8px 30px color-mix(in srgb, var(--accent) 35%, transparent)}
+         .card,.btn,.mock,.plan,.stat-band{border:2.5px solid var(--border)!important;box-shadow:var(--shadow)!important}
+         .btn-primary{background:var(--accent);color:#fff}
+         .kicker{text-transform:uppercase;letter-spacing:.12em}
+         .badge{border:2.5px solid var(--border);box-shadow:4px 4px 0 #111}
+         h1{text-transform:uppercase;letter-spacing:-.01em}
          </style>
 </head>
 <body>

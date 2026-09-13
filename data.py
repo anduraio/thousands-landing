@@ -791,3 +791,9 @@ BRANDS = [
 
 def slugify(name: str) -> str:
     return name.lower().replace(" ", "").replace("&", "and").replace("+", "plus")
+
+# ---- expansion pack: 25 more sectors / 100 more brands (see data2.py) ----
+from data2 import EXTRA_SECTORS, EXTRA_BRANDS  # noqa: E402
+
+SECTORS.update(EXTRA_SECTORS)
+BRANDS.extend(EXTRA_BRANDS)

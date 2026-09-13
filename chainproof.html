@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 100 100&#x27;&gt;&lt;rect width=&#x27;100&#x27; height=&#x27;100&#x27; rx=&#x27;22&#x27; fill=&#x27;#111&#x27;/&gt;&lt;text x=&#x27;50&#x27; y=&#x27;68&#x27; font-size=&#x27;56&#x27; text-anchor=&#x27;middle&#x27;&gt;⛓️&lt;/text&gt;&lt;/svg&gt;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -188,19 +188,17 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:color-m
 }
 
   :root {
-    --bg:#fff8f3; --surface:#ffffff; --fg:#2a1d33;
-    --muted:#77697f; --border:#f3e3ee;
+    --bg:#fff9f2; --surface:#ffffff; --fg:#231a14;
+    --muted:#7a6a5c; --border:#f0e2d2;
     --accent:#b45309; --accent2:#0ea5e9;
-    --radius:26px; --btn-radius:999px;
-    --shadow:0 2px 4px rgba(160,80,140,.06), 0 14px 36px rgba(160,80,140,.10);
-    --font-head:'Baloo 2', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-    --font-body:'Nunito', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --radius:24px; --btn-radius:999px;
+    --shadow:0 2px 4px rgba(180,110,60,.06), 0 18px 44px rgba(180,110,60,.12);
+    --font-head:'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body:'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   }
-         body{background:
-           radial-gradient(500px 320px at 8% 0%, #ffe3f0, transparent 65%),
-           radial-gradient(600px 360px at 96% 6%, #e3ecff, transparent 65%),
-           var(--bg);}
-         .feat-icon{border-radius:30% 70% 62% 38%/55% 40% 60% 45%!important}
+         body{background:linear-gradient(180deg,#fff3e6 0%, var(--bg) 34%)}
+         .btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent2))}
+         .stat-band{background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 12%,#fff),color-mix(in srgb,var(--accent2) 12%,#fff))}
          </style>
 </head>
 <body>
