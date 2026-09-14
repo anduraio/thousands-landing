@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Triagerepair — Diagnosis, free-ish</title>
+<meta name="description" content="Fault triage and honest quotes for repair shops.">
+<link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 100 100&#x27;&gt;&lt;rect width=&#x27;100&#x27; height=&#x27;100&#x27; rx=&#x27;22&#x27; fill=&#x27;#111&#x27;/&gt;&lt;text x=&#x27;50&#x27; y=&#x27;68&#x27; font-size=&#x27;56&#x27; text-anchor=&#x27;middle&#x27;&gt;🔧&lt;/text&gt;&lt;/svg&gt;">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+.grid>*{min-width:0}
+img{max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--font-head);line-height:1.12;margin:0 0 .5em}
+h2{font-size:clamp(1.7rem,3.2vw,2.5rem);letter-spacing:-.015em}
+h3{font-size:1.12rem}
+p{margin:0 0 1em}
+.sub{color:var(--muted);max-width:640px;margin:0 auto 40px;text-align:center}
+.kicker{color:var(--accent);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;margin:0 0 10px;text-align:center}
+section{padding:84px 0}
+section .kicker+h2{text-align:center}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb, var(--bg) 82%, transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-in{display:flex;align-items:center;gap:22px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:700;font-size:1.12rem;white-space:nowrap}
+.brand-mark{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:17px;box-shadow:0 4px 12px color-mix(in srgb, var(--accent) 35%, transparent)}
+.nav-links{display:flex;gap:26px;margin:0 auto}
+.nav-links a{color:var(--muted);font-size:.92rem;font-weight:500}
+.nav-links a:hover{color:var(--fg)}
+.nav-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.burger{display:none;background:none;border:0;cursor:pointer;padding:6px}
+.burger span{display:block;width:20px;height:2px;background:var(--fg);margin:4px 0;border-radius:2px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;border-radius:var(--btn-radius);font-weight:600;font-size:.94rem;border:1px solid transparent;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease, background .15s ease;white-space:nowrap}
+.btn-lg{padding:14px 28px;font-size:1.02rem}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 26px color-mix(in srgb, var(--accent) 38%, transparent)}
+.btn-ghost{border-color:var(--border);color:var(--fg);background:transparent}
+.btn-ghost:hover{border-color:var(--muted)}
+
+/* hero */
+.hero{padding:88px 0 40px}
+.hero h1{font-size:clamp(2.5rem,5.6vw,4rem);margin:18px 0 20px;letter-spacing:-.025em}
+.hero .lede{font-size:clamp(1.05rem,1.6vw,1.24rem);color:var(--muted);max-width:600px;margin-bottom:30px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:color-mix(in srgb, var(--accent) 10%, var(--surface));border:1px solid color-mix(in srgb, var(--accent) 22%, transparent);font-size:.85rem;font-weight:600;color:var(--accent)}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.proof{display:flex;align-items:center;gap:12px;margin-top:30px}
+.proof .av{width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;border:2px solid var(--surface);margin-left:-8px}
+.proof .av:first-child{margin-left:0}
+.proof p{margin:0;font-size:.9rem;color:var(--muted)}
+.proof b{color:var(--fg)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero-center{text-align:center;display:flex;flex-direction:column;align-items:center}
+.hero-center .lede{margin-left:auto;margin-right:auto}
+.hero-center .cta-row{justify-content:center}
+.hero-center .proof{justify-content:center}
+.hero-visual{min-width:0}
+.hero-visual-center{width:min(760px,100%);margin-top:56px}
+
+/* mock ui */
+.mock{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);text-align:left}
+.mk-bar{display:flex;align-items:center;gap:6px;padding:12px 16px;border-bottom:1px solid var(--border)}
+.mk-bar i{width:10px;height:10px;border-radius:50%;background:var(--border)}
+.mk-bar i:first-child{background:var(--accent)}
+.mk-bar span{margin-left:auto;font-size:.72rem;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.mk-body{padding:18px}
+.mk-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.mk-chip{border:1px solid var(--border);border-radius:calc(var(--radius) - 6px);padding:10px 12px;background:color-mix(in srgb, var(--surface) 60%, var(--bg))}
+.mk-chip b{display:block;font-size:1.02rem;font-family:var(--font-head)}
+.mk-chip span{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.mk-chart{border:1px solid var(--border);border-radius:calc(var(--radius) - 6px);padding:14px;margin-bottom:14px;background:color-mix(in srgb, var(--surface) 60%, var(--bg))}
+.mk-bars{display:flex;align-items:flex-end;gap:8px;height:96px}
+.mk-bars i{flex:1;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,var(--accent2),var(--accent));opacity:.9}
+.mk-bars i:nth-child(2n){opacity:.45}
+.mk-row{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px dashed var(--border);font-size:.86rem}
+.mk-row:last-child{border-bottom:0}
+.mk-dot{width:8px;height:8px;border-radius:50%}
+.mk-name{color:var(--muted)}
+.mk-val{margin-left:auto;color:var(--accent);font-weight:700}
+
+/* logos */
+.logos{border-block:1px solid var(--border);padding:22px 0;background:color-mix(in srgb, var(--surface) 50%, var(--bg))}
+.logos .wrap{display:flex;align-items:center;gap:28px;flex-wrap:wrap;justify-content:center}
+.logos-label{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600}
+.logo{font-family:var(--font-head);font-weight:700;color:var(--muted);opacity:.75;font-size:1rem;white-space:nowrap}
+
+/* grids & cards */
+.grid{display:grid;gap:22px}
+.three{grid-template-columns:repeat(3,1fr)}
+.four{grid-template-columns:repeat(4,1fr)}
+.feats{grid-template-columns:repeat(3,1fr);margin-top:44px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+.feat{transition:transform .18s ease, box-shadow .18s ease}
+.feat:hover{transform:translateY(-4px)}
+.feat-icon{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:12px;background:color-mix(in srgb, var(--accent) 13%, transparent);font-size:22px;margin-bottom:16px}
+.feat p{color:var(--muted);font-size:.94rem;margin:0}
+.tiles .feat{background:linear-gradient(160deg, color-mix(in srgb, var(--accent) 7%, var(--surface)), var(--surface))}
+
+/* steps */
+.step{position:relative}
+.step-n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:800;font-family:var(--font-head);margin-bottom:14px}
+.step p{color:var(--muted);font-size:.94rem;margin:0}
+
+/* stats band */
+.stat-band{background:linear-gradient(120deg, color-mix(in srgb, var(--accent) 12%, var(--surface)), color-mix(in srgb, var(--accent2) 12%, var(--surface)));border-block:1px solid var(--border);padding:56px 0}
+.stat{text-align:center}
+.stat b{display:block;font-family:var(--font-head);font-size:clamp(1.9rem,3.4vw,2.7rem);letter-spacing:-.02em;background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{color:var(--muted);font-size:.9rem;font-weight:600}
+
+/* pricing */
+.plans{margin-top:44px;align-items:stretch}
+.plan{display:flex;flex-direction:column;position:relative}
+.plan.featured{border:2px solid var(--accent);transform:scale(1.03);z-index:1}
+.plan-tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;white-space:nowrap}
+.price{font-family:var(--font-head);font-size:2.6rem;font-weight:800;letter-spacing:-.02em;margin:6px 0 10px}
+.price .per{font-size:1rem;color:var(--muted);font-weight:500}
+.plan p{color:var(--muted);font-size:.94rem;flex:1}
+.plan .btn{margin-top:18px}
+
+/* quotes */
+.quote{margin:0;display:flex;flex-direction:column;gap:10px}
+.qmark{font-family:var(--font-head);font-size:2.4rem;line-height:1;color:var(--accent);font-weight:800}
+.quote blockquote{margin:0;font-size:1.02rem}
+.quote figcaption{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:14px}
+.quote .av{width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;flex:none}
+.quote .role{color:var(--muted);font-size:.85rem}
+
+/* faq */
+.faq-wrap{max-width:780px}
+.faqs{display:flex;flex-direction:column;gap:12px;margin-top:36px}
+.faq{padding:0;overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;padding:18px 22px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq .chev{color:var(--accent);font-size:1.3rem;font-weight:700;transition:transform .2s ease}
+.faq[open] .chev{transform:rotate(45deg)}
+.faq p{padding:0 22px 20px;color:var(--muted);margin:0}
+
+/* cta */
+#cta{padding-top:20px}
+.cta-band{background:linear-gradient(120deg,var(--accent),var(--accent2));border-radius:calc(var(--radius) + 10px);padding:64px 32px;text-align:center;color:#fff;box-shadow:0 30px 70px color-mix(in srgb, var(--accent) 35%, transparent)}
+.cta-band h2{color:#fff}
+.cta-band p{opacity:.92;margin-bottom:26px}
+.cta-band .btn-primary{background:#fff;color:#111}
+
+/* footer */
+footer{border-top:1px solid var(--border);padding:56px 0 32px;background:color-mix(in srgb, var(--surface) 55%, var(--bg))}
+.f-top{display:flex;align-items:center;gap:16px;margin-bottom:36px;flex-wrap:wrap}
+.f-tag{color:var(--muted);font-size:.92rem;margin:0}
+.f-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:40px}
+.f-col h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:0 0 14px}
+.f-col a{display:block;color:var(--muted);font-size:.92rem;padding:5px 0}
+.f-col a:hover{color:var(--fg)}
+.f-bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:22px;color:var(--muted);font-size:.85rem}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(16px)}
+.reveal.in{opacity:1;transform:none;transition:opacity .6s ease, transform .6s ease}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* responsive */
+@media (max-width: 960px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .three,.four,.feats{grid-template-columns:repeat(2,1fr)}
+  .f-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width: 720px){
+  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--border);flex-direction:column;gap:0;padding:8px 0}
+  .nav-links a{padding:14px 24px}
+  .nav-links.open{display:flex}
+  .burger{display:block}
+  .nav-hide{display:none}
+  .three,.four,.feats{grid-template-columns:1fr}
+  .plan.featured{transform:none}
+  .mk-chips{grid-template-columns:repeat(3,1fr);gap:6px}
+  .mk-chip{padding:8px}
+  .mk-chip b{font-size:.9rem}
+  .mk-chip span{font-size:.6rem}
+  .hero{padding-top:56px}
+  section{padding:60px 0}
+}
+
+  :root {
+    --bg:#f2f7fa; --surface:#ffffff; --fg:#0c2231;
+    --muted:#56718a; --border:#dbe8f0;
+    --accent:#334155; --accent2:#22c55e;
+    --radius:12px; --btn-radius:10px;
+    --shadow:0 2px 3px rgba(12,60,90,.06), 0 16px 40px rgba(12,60,90,.10);
+    --font-head:'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-body:'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+         body{background:linear-gradient(180deg,#eaf3f9 0%, var(--bg) 30%), var(--bg)}
+         .nav{border-bottom:1.5px solid var(--border)}
+         .hero h1{letter-spacing:-.03em}
+         .badge{background:#fff}
+         .stat-band{background:linear-gradient(120deg,#eaf3f9,#f5f0ea)}
+         </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="wrap nav-in">
+      <a class="brand" href="#"><span class="brand-mark">🔧</span>Triagerepair</a>
+      <div class="nav-links" id="navLinks"><a href="#features">Features</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+      <div class="nav-actions">
+        <a class="btn btn-ghost nav-hide" href="#pricing">See pricing</a>
+        <a class="btn btn-primary" href="#cta">Get started</a>
+        <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+<header class="hero"><div class="wrap hero-center"><span class="badge">🔧 Built for repair shops</span><h1>Diagnosis, free-ish</h1><p class="lede">Fault triage and honest quotes for repair shops.</p><div class="cta-row"><a class="btn btn-primary btn-lg" href="#cta">Start free</a><a class="btn btn-ghost btn-lg" href="#features">See how it works →</a></div><div class="proof"><span class="av" style="background:rgba(51,65,85,0.16);color:#334155">SM</span><span class="av" style="background:rgba(51,65,85,0.16);color:#334155">JP</span><span class="av" style="background:rgba(51,65,85,0.16);color:#334155">AR</span><p>Trusted by <b>12,400</b> stores</p></div><div class="hero-visual hero-visual-center">
+    <div class="mock" aria-hidden="true">
+      <div class="mk-bar"><i></i><i></i><i></i><span>Triagerepair · live</span></div>
+      <div class="mk-body">
+        <div class="mk-chips"><div class="mk-chip"><b>4.8★</b><span>merchant rating</span></div><div class="mk-chip"><b>12,400</b><span>stores</span></div><div class="mk-chip"><b>+29%</b><span>conversion</span></div></div>
+        <div class="mk-chart"><div class="mk-bars"><i style="height:27%"></i><i style="height:48%"></i><i style="height:81%"></i><i style="height:27%"></i><i style="height:80%"></i><i style="height:52%"></i><i style="height:21%"></i><i style="height:70%"></i></div></div>
+        <div class="mk-rows"><div class="mk-row"><span class="mk-dot" style="background:#22c55e"></span><span class="mk-name">📈</span><span class="mk-val">✓</span></div><div class="mk-row"><span class="mk-dot" style="background:#22c55e"></span><span class="mk-name">✉️</span><span class="mk-val">●</span></div><div class="mk-row"><span class="mk-dot" style="background:#22c55e"></span><span class="mk-name">🔧</span><span class="mk-val">✓</span></div></div>
+      </div>
+    </div></div></div></header>
+<div class="logos"><div class="wrap"><span class="logos-label">Trusted by repair shops at</span><span class="logo">Lorimer</span><span class="logo">Sallow</span><span class="logo">Fernwood</span><span class="logo">Fern &amp; Fable</span><span class="logo">Old Quarter</span></div></div>
+<section id="features"><div class="wrap"><p class="kicker">Features</p><h2>Everything you need, nothing you don't</h2><p class="sub">Why teams choose Triagerepair over duct-taping five tools together.</p><div class="grid feats"><article class="card feat"><div class="feat-icon">🔧</div><h3>Diagnosis, free-ish</h3><p>Instant fault triage with honest quotes.</p></article><article class="card feat"><div class="feat-icon">🔋</div><h3>Batteries, same-day</h3><p>Phone and laptop batteries stocked per model.</p></article><article class="card feat"><div class="feat-icon">🔐</div><h3>Data, protected</h3><p>Privacy protocol documented per repair.</p></article><article class="card feat"><div class="feat-icon">🛍️</div><h3>A store that&#x27;s fast</h3><p>Storefronts that score 95+ on mobile speed.</p></article><article class="card feat"><div class="feat-icon">💳</div><h3>Checkout that converts</h3><p>One-page checkout with wallets and local methods.</p></article><article class="card feat"><div class="feat-icon">📦</div><h3>Shipping, sorted</h3><p>Live rates, labels and tracking out of the box.</p></article></div></div></section>
+<section id="how"><div class="wrap"><p class="kicker">How it works</p><h2>Up and running in three steps</h2><div class="grid three"><article class="card step"><span class="step-n">1</span><h3>Create your account</h3><p>Two minutes to sign up. No credit card, no sales call required.</p></article><article class="card step"><span class="step-n">2</span><h3>Make Triagerepair yours</h3><p>Configure it around how your team already works — imports, templates and defaults included.</p></article><article class="card step"><span class="step-n">3</span><h3>See results fast</h3><p>Most repair shops get value inside the first week, and it compounds from there.</p></article></div></div></section>
+<section class="stat-band"><div class="wrap grid four"><div class="stat"><b>12,400</b><span>stores</span></div><div class="stat"><b>+29%</b><span>conversion</span></div><div class="stat"><b>4.1M</b><span>orders monthly</span></div><div class="stat"><b>4.8★</b><span>merchant rating</span></div></div></section>
+<section id="pricing"><div class="wrap"><p class="kicker">Pricing</p><h2>Simple pricing that scales with you</h2><p class="sub">Start free. Upgrade when Triagerepair has already paid for itself.</p><div class="grid three plans"><article class="card plan "><h3>Launch</h3><div class="price">$25<span class='per'>/mo</span></div><p>Everything to start selling for repair shops.</p><a class="btn btn-ghost" href="#cta">Choose Launch</a></article><article class="card plan featured"><span class='plan-tag'>Most popular</span><h3>Grow</h3><div class="price">$65<span class='per'>/mo</span></div><p>Adds automation, segments and reports.</p><a class="btn btn-primary" href="#cta">Choose Grow</a></article><article class="card plan "><h3>Scale</h3><div class="price">$200<span class='per'>/mo</span></div><p>Headless APIs, SLAs and priority support.</p><a class="btn btn-ghost" href="#cta">Choose Scale</a></article></div></div></section>
+<section id="testimonials"><div class="wrap"><p class="kicker">Testimonials</p><h2>People who switched, in their words</h2><div class="grid three"><figure class="card quote"><div class="qmark">“</div><blockquote>Conversion up 30% the month we moved. Sales didn&#x27;t change, the checkout did.</blockquote><figcaption><span class="av" style="background:rgba(51,65,85,0.16);color:#334155">SM</span><span><b>Sofia Marino</b><br><span class="role">Store owner</span></span></figcaption></figure><figure class="card quote"><div class="qmark">“</div><blockquote>Shipping used to eat a day a week. Now it&#x27;s minutes.</blockquote><figcaption><span class="av" style="background:rgba(51,65,85,0.16);color:#334155">JP</span><span><b>James Park</b><br><span class="role">Ops lead</span></span></figcaption></figure><figure class="card quote"><div class="qmark">“</div><blockquote>The abandoned-cart emails paid for the year in a month.</blockquote><figcaption><span class="av" style="background:rgba(51,65,85,0.16);color:#334155">AR</span><span><b>Anika Rao</b><br><span class="role">Founder</span></span></figcaption></figure></div></div></section>
+<section id="faq"><div class="wrap faq-wrap"><p class="kicker">FAQ</p><h2>Questions, answered</h2><div class="faqs"><details class="card faq"><summary>Can we migrate our existing store?<span class="chev">+</span></summary><p>Yes — products, customers and orders import in hours.</p></details><details class="card faq"><summary>Are there transaction fees?<span class="chev">+</span></summary><p>0% on annual plans beyond payment processing.</p></details><details class="card faq"><summary>Do you handle taxes?<span class="chev">+</span></summary><p>Automatic sales tax, VAT and GST calculation.</p></details><details class="card faq"><summary>Can we customize everything?<span class="chev">+</span></summary><p>Themes, an editor, or full headless access.</p></details></div></div></section>
+<section id="cta"><div class="wrap"><div class="cta-band"><h2>Ready to see what Triagerepair can do?</h2><p>Free to try. Set up in minutes. Cancel anytime.</p><a class="btn btn-primary btn-lg" href="#">Get started free</a></div></div></section>
+<footer><div class="wrap"><div class="f-top"><a class="brand" href="#"><span class="brand-mark">🔧</span>Triagerepair</a><p class="f-tag">Fault triage and honest quotes for repair shops.</p></div><div class="f-grid"><div class="f-col"><h4>Product</h4><a href="#">Features</a><a href="#">Pricing</a><a href="#">Integrations</a><a href="#">Changelog</a></div><div class="f-col"><h4>Company</h4><a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Contact</a></div><div class="f-col"><h4>Resources</h4><a href="#">Docs</a><a href="#">Help center</a><a href="#">API status</a><a href="#">Community</a></div><div class="f-col"><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Security</a><a href="#">DPA</a></div></div><div class="f-bottom"><span>© 2026 Triagerepair, Inc. All rights reserved.</span><span>🔧 Electronics Repair</span></div></div></footer>
+<script>
+(function(){
+  var b=document.getElementById('burger'),l=document.getElementById('navLinks');
+  if(b){b.addEventListener('click',function(){var o=l.classList.toggle('open');b.setAttribute('aria-expanded',o)});}
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.08});
+    document.querySelectorAll('section, .hero, .logos').forEach(function(el,i){el.classList.add('reveal');el.style.transitionDelay=(Math.min(i%4,3)*60)+'ms';io.observe(el);});
+  }
+})();
+</script>
+</body>
+</html>

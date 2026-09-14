@@ -812,3 +812,40 @@ SECTORS.update(EXTRA4_SECTORS)
 SECTORS.update(EXTRA5_SECTORS)
 BRANDS.extend(EXTRA4_BRANDS)
 BRANDS.extend(EXTRA5_BRANDS)
+
+# ---- expansion packs 6-10: 250 lite sectors / 1000 brands ----
+# Lite sectors hand-write the unique parts (name, audience, a few features,
+# brands + headlines) and borrow stats/plans/testimonials/FAQs from an
+# archetype, so 1000 pages stay varied without 250 hand-built copy banks.
+import zlib  # noqa: E402
+from archetypes import ARCHETYPES, LOGO_POOL  # noqa: E402
+from data6 import LITE6  # noqa: E402
+from data7 import LITE7  # noqa: E402
+from data8 import LITE8  # noqa: E402
+from data9 import LITE9  # noqa: E402
+from data10 import LITE10  # noqa: E402
+
+for _lite in (LITE6, LITE7, LITE8, LITE9, LITE10):
+    for (_name, _icon, _acc, _acc2, _aud, _arch, _feats, _brands) in _lite:
+        assert _name not in SECTORS, f"duplicate sector: {_name}"
+        _A = ARCHETYPES[_arch]
+        _h = zlib.crc32(_name.encode())
+        _fill = lambda s: s.format(audience=_aud, name=_name)  # noqa: E731
+        features = list(_feats)
+        for emoji, t, d in _A["generic"]:
+            features.append((emoji, _fill(t), _fill(d)))
+        stats = [(n, _fill(l)) for n, l in _A["stats"]]
+        scale = 0.8 + (_h % 5) * 0.2
+        plans = []
+        for pn, p, blurb in _A["plans"]:
+            if isinstance(p, int) and p > 0:
+                p = int(round(p * scale / 5.0)) * 5 if p >= 20 else int(round(p * scale))
+            plans.append((pn, p, _fill(blurb)))
+        testimonials = [(q, n, _fill(r)) for q, n, r in _A["testimonials"]]
+        faqs = [(_fill(q), _fill(a)) for q, a in _A["faqs"]]
+        logos = [LOGO_POOL[(_h + i * 7) % len(LOGO_POOL)] for i in range(5)]
+        SECTORS[_name] = dict(icon=_icon, accent=_acc, accent2=_acc2, audience=_aud,
+                              features=features, stats=stats, plans=plans,
+                              testimonials=testimonials, faqs=faqs, logos=logos)
+        for (_bn, _bh, _bs) in _brands:
+            BRANDS.append((_bn, _name, _bh, _bs))

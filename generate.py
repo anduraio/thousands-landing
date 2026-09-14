@@ -269,7 +269,7 @@ def section_features(brand, sector, theme, off):
 def section_how(brand, sector, off):
     steps = [
         ("1", "Create your account", "Two minutes to sign up. No credit card, no sales call required."),
-        ("2", f"Make {esc(brand[0])} yours", f"Configure it around how your {esc(sector['audience'].split()[-1] if sector['audience'] else 'team')} already works — imports, templates and defaults included."),
+        ("2", f"Make {esc(brand[0])} yours", "Configure it around how your team already works — imports, templates and defaults included."),
         ("3", "See results fast", f"Most {esc(sector['audience'])} get value inside the first week, and it compounds from there."),
     ]
     cards = "".join(
@@ -288,7 +288,7 @@ def section_pricing(brand, sector, off):
     scale = [1.0, 1.15, 1.3, 1.45][off % 4]
     plans = []
     for i, (nm, price, blurb) in enumerate(sector["plans"]):
-        if price > 0:
+        if isinstance(price, int) and price > 0:
             price = int(round(price * scale / 5.0) * 5) if price >= 20 else int(round(price * scale))
         plans.append((nm, price, blurb, i == 1))
     cards = ""
