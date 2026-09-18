@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Generate 100 sector landing pages + an index gallery.
+"""Generate every landing page, the index gallery and README.md.
 
 Run:  python3 generate.py
-Output: <slug>.html for each of the 100 brands, plus index.html and README.md
+Output: <slug>.html for each brand, plus index.html and README.md
 """
 import html
 import hashlib
@@ -1097,9 +1097,12 @@ def write_readme():
 {len(BRANDS)} standalone, self-contained landing pages for fictional products across **{len(SECTORS)} sectors**
 (4 products each), rendered in **{len(THEMES)} rotating visual themes**.
 
+Every brand, product, person and statistic here is invented — these are demo
+templates, not real companies.
+
 ## Browse
 
-Open `index.html` — a filterable gallery of all 100 pages:
+Open `index.html` — a filterable gallery of all {len(BRANDS)} pages:
 
 - **Search** by name, sector or headline
 - **Filter** by sector (dropdown or quick pills), theme, and light/dark mode
@@ -1119,8 +1122,14 @@ system fonts offline).
 - `index.html` — filterable gallery of all {len(BRANDS)} pages
 - `<brand>.html` × {len(BRANDS)} — one landing page per product (nav, hero with fake product UI,
   logo strip, features, how-it-works, stats band, pricing, testimonials, FAQ, CTA, footer)
-- `data.py` — all copy: sector content banks + 100 brand entries
-- `generate.py` — theme engine + page builder
+- `generate.py` — theme engine, page builder, gallery builder and this README
+- `data.py` — the original sector banks and brand list, plus the expander that
+  merges the packs below into `SECTORS` / `BRANDS`
+- `data2.py` … `data5.py` — 25 full sectors each, with their own features,
+  stats, plans, testimonials and FAQs
+- `data6.py` … `data10.py` — 50 "lite" sectors each: name, audience, unique
+  features and brands, borrowing the rest of their copy from an archetype
+- `archetypes.py` — the 12 copy archetypes the lite sectors borrow from
 
 ## Regenerate
 
@@ -1128,7 +1137,12 @@ system fonts offline).
 python3 generate.py
 ```
 
-Edit `data.py` to change copy or add brands; edit `THEMES` in `generate.py` for styling.
+Rewrites every page, `index.html` and this README. Edit the `data*.py` banks to
+change copy or add brands; edit `THEMES` in `generate.py` for styling.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
 """
     with open(os.path.join(HERE, "README.md"), "w") as f:
         f.write(md)

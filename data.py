@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Content banks for 100 landing pages.
+"""Content banks for the landing pages.
 
 SECTORS  — per-sector copy banks (features, stats, plans, testimonials, faqs, logos).
-BRANDS   — 100 products: (name, sector_key, headline, subhead).
+BRANDS   — products: (name, sector_key, headline, subhead).
+
+The banks below are the originals; the packs imported at the bottom (data2..data5
+for full sectors, data6..data10 for lite sectors that borrow from archetypes.py)
+are merged into SECTORS / BRANDS by the expander.
 """
 
 SECTORS = {
