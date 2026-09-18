@@ -83,14 +83,13 @@ select:focus{border-color:#7c5cff}
 #empty{display:none;text-align:center;padding:70px 0;color:#98a0b8}
 #empty button{margin-top:14px;background:#2a2550;border:1px solid #3a4573;color:#fff;border-radius:10px;padding:10px 18px;cursor:pointer;font-weight:600}
 
-/* hover live preview */
-#hover{position:fixed;z-index:80;width:340px;pointer-events:none;opacity:0;transform:translateY(8px) scale(.98);transition:opacity .18s ease,transform .18s ease}
-#hover.on{opacity:1;transform:none}
-.hv-head{display:flex;justify-content:space-between;gap:10px;font-size:.72rem;color:#98a0b8;padding:7px 12px;background:#101529;border:1px solid #26304f;border-bottom:0;border-radius:12px 12px 0 0;font-weight:600}
-.hv-frame{position:relative;height:214px;border-radius:0 0 12px 12px;overflow:hidden;border:1px solid #26304f;background:#fff;box-shadow:0 30px 70px rgba(0,0,0,.55)}
-#hoverFrame{width:1280px;height:820px;transform:scale(.2656);transform-origin:0 0;border:0;display:block}
-.spin{position:absolute;inset:0;display:none;place-items:center;color:#98a0b8;font-size:.8rem;background:#0f1428}
-@media(max-width:999px){#hover{display:none}}
+/* live previews on the cards */
+.pg-shot{position:relative;overflow:hidden;aspect-ratio:16/10;border:1px solid #1d2440;border-radius:11px;background:#0b0f1d}
+.shot-inner{position:absolute;top:0;left:0;width:1280px;height:800px;transform-origin:0 0}
+.shot-frame{width:1280px;height:800px;border:0;display:block;pointer-events:none;background:#fff}
+.shot-spin{position:absolute;inset:0;display:grid;place-items:center;font-size:.72rem;color:#6f7896;background:linear-gradient(100deg,#0f1428 30%,#161e3a 50%,#0f1428 70%) 0 0/220% 100%;animation:shimmer 1.5s linear infinite}
+.pg-shot.loaded .shot-spin{display:none}
+@keyframes shimmer{to{background-position:-220% 0}}
 
 /* preview modal */
 #pv{position:fixed;inset:0;z-index:100;display:none;flex-direction:column;background:rgba(5,7,16,.94)}
@@ -117,7 +116,7 @@ footer{border-top:1px solid #1d2440;margin-top:44px;padding:28px 0;color:#6f7896
 <body>
 <header class="hero"><div class="wrap">
 <h1>🚀 1500 Landing Pages</h1>
-<p>One handcrafted landing page for each of 1500 fictional products across 375 industries. Search, filter, sort — hover any card for a live preview, or click to open it in a device-sized viewer.</p>
+<p>One handcrafted landing page for each of 1500 fictional products across 375 industries. Search, filter, sort — every card previews its page live, and a click opens it in a device-sized viewer.</p>
 <div class="pill-row"><span class="pill">375 sectors</span><span class="pill">15 themes</span><span class="pill">🔍 search</span><span class="pill">🎛 filter & sort</span><span class="pill">⊞ grid / ☰ list</span><span class="pill">👀 live preview</span></div>
 </div></header>
 
@@ -145,11 +144,6 @@ footer{border-top:1px solid #1d2440;margin-top:44px;padding:28px 0;color:#6f7896
 <div id="grid"></div>
 <div id="empty"><p>😕 No templates match your search.</p><button id="clear" type="button">Clear all filters</button></div>
 </main>
-
-<div id="hover" aria-hidden="true">
-  <div class="hv-head"><span id="hoverName"></span><span>live preview · click to open</span></div>
-  <div class="hv-frame"><iframe id="hoverFrame" title="Live preview" loading="lazy" tabindex="-1"></iframe><div class="spin" id="hoverSpin">loading…</div></div>
-</div>
 
 <div id="pv" role="dialog" aria-modal="true" aria-label="Template preview">
   <div class="pv-bar">
@@ -226,6 +220,7 @@ function card(p){
     </article>`;
   }
   return `<article class="pg" data-slug="${p.s}" data-name="${esc(p.n)}">
+    <div class="pg-shot" data-url="${p.u}"><div class="shot-spin">loading…</div></div>
     <div class="pg-top">
       <span class="pg-icon" style="background:linear-gradient(135deg,${p.a},${p.a2})">${p.i}</span>
       <span class="pg-mode">${modeDot(p.m)}${p.t}</span>
@@ -252,38 +247,86 @@ function render(){
     html = `<div class="${state.view === 'list' ? 'pg-list' : 'pg-grid'}" style="padding-top:24px">` + list.map(card).join('') + `</div>`;
   }
   grid.innerHTML = html;
+  observeShots();
 }
 function syncPills(){
   document.querySelectorAll('#secnav a').forEach(a => a.classList.toggle('on', a.dataset.sector === state.sector));
 }
 
-/* ---------- hover live preview ---------- */
-const hov = $('#hover'), hovFrame = $('#hoverFrame'), hovSpin = $('#hoverSpin');
-let hovSlug = null, hovTimer = null;
-function showHover(el){
-  const slug = el.dataset.slug;
-  clearTimeout(hovTimer);
-  hovTimer = setTimeout(() => {
-    if (hovSlug !== slug){
-      hovSpin.style.display = 'grid';
-      hovFrame.src = URLS[slug];
-      $('#hoverName').textContent = el.dataset.name;
-      hovSlug = slug;
-    }
-    const r = el.getBoundingClientRect(), W = 340, H = 250;
-    let x = r.right + 16;
-    if (x + W > innerWidth - 8) x = r.left - W - 16;
-    x = Math.max(8, Math.min(x, innerWidth - W - 8));
-    const y = Math.max(64, Math.min(r.top - 8, innerHeight - H - 12));
-    hov.style.left = x + 'px'; hov.style.top = y + 'px';
-    hov.classList.add('on');
-  }, 200);
+/* ---------- live previews on the cards ---------- */
+const DESIGN_W = 1280, NEAR = 400, FAR = 1400;
+const live = new Set();
+function fitShot(inner, shot){
+  if (inner) inner.style.transform = `scale(${shot.clientWidth / DESIGN_W})`;
 }
-function hideHover(){
-  clearTimeout(hovTimer);
-  hovTimer = setTimeout(() => hov.classList.remove('on'), 120);
+/* A card has no frame until it comes near the viewport, and loses it once it is
+   far away: 1500 documents would sink the renderer, so a preview exists only
+   while it is worth showing. */
+function loadShot(shot){
+  if (live.has(shot)) return;
+  const inner = document.createElement('div');
+  inner.className = 'shot-inner';
+  const f = document.createElement('iframe');
+  f.className = 'shot-frame';
+  f.setAttribute('scrolling', 'no');
+  f.setAttribute('tabindex', '-1');
+  f.setAttribute('aria-hidden', 'true');
+  f.addEventListener('load', () => shot.classList.add('loaded'), { once: true });
+  inner.appendChild(f);
+  shot.appendChild(inner);
+  fitShot(inner, shot);
+  f.src = shot.dataset.url;
+  live.add(shot);
 }
-hovFrame.addEventListener('load', () => { hovSpin.style.display = 'none'; });
+function freeShot(shot){
+  if (!live.has(shot)) return;
+  const inner = shot.querySelector('.shot-inner');
+  if (inner) inner.remove();
+  shot.classList.remove('loaded');
+  live.delete(shot);
+}
+let shotEls = [];
+let shotTick = false;
+function shotDist(el){
+  const r = el.getBoundingClientRect();
+  if (r.bottom < 0) return -r.bottom;
+  return r.top > innerHeight ? r.top - innerHeight : 0;
+}
+/* cards are stacked in document order, so the live ones are one slice: find it
+   by bisection and leave the other 1400 alone */
+function updateShots(){
+  if (!shotEls.length) return;
+  let lo = 0, hi = shotEls.length - 1, start = shotEls.length;
+  while (lo <= hi){
+    const mid = (lo + hi) >> 1;
+    if (shotEls[mid].getBoundingClientRect().bottom < -FAR) lo = mid + 1;
+    else { start = mid; hi = mid - 1; }
+  }
+  for (let i = start; i < shotEls.length; i++){
+    const s = shotEls[i];
+    if (s.getBoundingClientRect().top > innerHeight + FAR) break;
+    if (shotDist(s) <= NEAR) loadShot(s);
+  }
+  live.forEach(s => { if (shotDist(s) > FAR) freeShot(s); });
+}
+function queueShots(){
+  if (shotTick) return;
+  shotTick = true;
+  requestAnimationFrame(() => { shotTick = false; updateShots(); });
+}
+function observeShots(){
+  live.forEach(freeShot);
+  shotEls = Array.from(document.querySelectorAll('.pg-shot'));
+  queueShots();
+}
+addEventListener('scroll', queueShots, { passive: true });
+addEventListener('resize', () => {
+  document.querySelectorAll('.shot-inner').forEach(inner => {
+    const shot = inner.closest('.pg-shot');
+    if (shot) fitShot(inner, shot);
+  });
+  queueShots();
+});
 
 /* ---------- preview modal ---------- */
 const pv = $('#pv'), pvFrame = $('#pvFrame'), pvStage = $('#pvStage'), pvWrap = $('#pvFrameWrap');
@@ -347,12 +390,6 @@ grid.addEventListener('click', e => {
   }
   openPv(el.dataset.slug);
 });
-grid.addEventListener('mouseover', e => {
-  const el = e.target.closest('[data-slug]');
-  if (!el || matchMedia('(hover: none)').matches || innerWidth < 1000) return;
-  showHover(el);
-});
-grid.addEventListener('mouseout', e => { if (e.target.closest('[data-slug]')) hideHover(); });
 $('#q').addEventListener('input', e => { state.q = e.target.value.trim(); render(); });
 $('#fsector').addEventListener('change', e => { state.sector = e.target.value; syncPills(); render(); });
 $('#ftheme').addEventListener('change', e => { state.theme = e.target.value; render(); });

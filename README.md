@@ -14,7 +14,8 @@ Open `index.html` — a filterable gallery of all 1500 pages:
 - **Filter** by sector (dropdown or quick pills), theme, and light/dark mode
 - **Sort** by sector (grouped), name A→Z / Z→A, theme, or shuffle
 - **Grid / list view** toggle
-- **Live previews** — hover a card for a scaled live thumbnail; click for a
+- **Live previews** — every card in the grid previews its own page, loaded as it
+  scrolls into view and released once it is far off screen; click a card for a
   full preview modal with desktop/tablet/phone widths, `←`/`→` to browse,
   `Esc` to close, and deep links via `index.html#preview=paystream`
   (also `#view=list`)
