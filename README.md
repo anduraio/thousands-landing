@@ -26,8 +26,10 @@ system fonts offline).
 ## Structure
 
 - `index.html` — filterable gallery of all 1500 pages
-- `<brand>.html` × 1500 — one landing page per product (nav, hero with fake product UI,
-  logo strip, features, how-it-works, stats band, pricing, testimonials, FAQ, CTA, footer)
+- `<sector-slug>/<brand>.html` × 1500 — one landing page per product (nav, hero with fake
+  product UI, logo strip, features, how-it-works, stats band, pricing, testimonials, FAQ,
+  CTA, footer), filed under one directory per sector — `fintech/`, `ai-and-automation/`, … —
+  four pages each, so the repository browses by sector instead of one flat list
 - `generate.py` — theme engine, page builder, gallery builder and this README
 - `data.py` — the original sector banks and brand list, plus the expander that
   merges the packs below into `SECTORS` / `BRANDS`

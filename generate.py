@@ -10,7 +10,7 @@ import os
 import re
 import webbrowser
 
-from data import SECTORS, BRANDS, slugify
+from data import SECTORS, BRANDS, slugify, sector_slug
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -645,8 +645,9 @@ def write_pages():
     themes_used = {}
     for i, brand in enumerate(BRANDS):
         page, theme = build_page(i, brand)
-        fn = slugify(brand[0]) + ".html"
-        with open(fn, "w") as f:
+        d = sector_slug(brand[1])
+        os.makedirs(d, exist_ok=True)
+        with open(os.path.join(d, slugify(brand[0]) + ".html"), "w") as f:
             f.write(page)
         themes_used[brand[0]] = theme["name"]
     build_index()
@@ -762,6 +763,7 @@ footer{border-top:1px solid #1d2440;margin-top:44px;padding:28px 0;color:#6f7896
 
 INDEX_JS = """
 const PAGES = __PAGES__;
+const URLS = {}; PAGES.forEach(p => URLS[p.s] = p.u);
 const SECTORS = __SECTORS__;
 const $ = s => document.querySelector(s);
 const grid = $('#grid');
@@ -807,7 +809,7 @@ function card(p){
       <span class="pg-icon" style="background:linear-gradient(135deg,${p.a},${p.a2})">${p.i}</span>
       <div class="pr-body"><h3>${esc(p.n)}</h3><p>${esc(p.h)}</p></div>
       <div class="pr-meta"><span class="chip">${esc(p.k)}</span><span class="chip">${modeDot(p.m)}${p.t}</span></div>
-      ${acts().replace('href="#"', `href="${p.s}.html"`)}
+      ${acts().replace('href="#"', `href="${p.u}"`)}
     </article>`;
   }
   return `<article class="pg" data-slug="${p.s}" data-name="${esc(p.n)}">
@@ -818,7 +820,7 @@ function card(p){
     <h3>${esc(p.n)}</h3>
     <p>${esc(p.h)}</p>
     <span class="chip">${esc(p.k)}</span>
-    ${acts().replace('href="#"', `href="${p.s}.html"`)}
+    ${acts().replace('href="#"', `href="${p.u}"`)}
   </article>`;
 }
 function render(){
@@ -851,7 +853,7 @@ function showHover(el){
   hovTimer = setTimeout(() => {
     if (hovSlug !== slug){
       hovSpin.style.display = 'grid';
-      hovFrame.src = slug + '.html';
+      hovFrame.src = URLS[slug];
       $('#hoverName').textContent = el.dataset.name;
       hovSlug = slug;
     }
@@ -885,9 +887,9 @@ function loadPv(){
   const p = pvList[pvIdx]; if (!p) return;
   $('#pvName').textContent = p.n;
   $('#pvMeta').innerHTML = `<span class="chip">${esc(p.k)}</span><span class="chip">${modeDot(p.m)}${p.t}</span>`;
-  $('#pvOpen').href = p.s + '.html';
+  $('#pvOpen').href = p.u;
   $('#pvSpin').style.display = 'grid';
-  pvFrame.src = p.s + '.html';
+  pvFrame.src = p.u;
   if (location.hash !== '#preview=' + p.s) location.hash = 'preview=' + p.s;
   fitPv();
 }
@@ -1060,7 +1062,7 @@ INDEX_TMPL = """<!DOCTYPE html>
 </div>
 
 <footer><div class="wrap">Generated with <code>generate.py</code> · open any page directly, no server needed</div></footer>
-<noscript><p style="text-align:center;padding:20px">Enable JavaScript to browse the gallery — or open any brand page directly, e.g. <a href="ledgerly.html">ledgerly.html</a>.</p></noscript>
+<noscript><p style="text-align:center;padding:20px">Enable JavaScript to browse the gallery — or open any brand page directly, e.g. <a href="__SAMPLE_PATH__">__SAMPLE_PATH__</a>.</p></noscript>
 <script>__INDEX_JS__</script>
 </body>
 </html>"""
@@ -1071,7 +1073,7 @@ def build_index():
 
     themes = [THEMES[i % len(THEMES)] for i in range(len(BRANDS))]
     pages = [
-        dict(n=b[0], s=slugify(b[0]), k=b[1], h=b[2],
+        dict(n=b[0], s=slugify(b[0]), u=f"{sector_slug(b[1])}/{slugify(b[0])}.html", k=b[1], h=b[2],
              t=themes[i]["name"], m=themes[i]["mode"],
              a=SECTORS[b[1]]["accent"], a2=SECTORS[b[1]]["accent2"], i=SECTORS[b[1]]["icon"])
         for i, b in enumerate(BRANDS)
@@ -1087,6 +1089,7 @@ def build_index():
            .replace("__INDEX_JS__", INDEX_JS)
            .replace("__PAGES__", json.dumps(pages, ensure_ascii=False))
            .replace("__SECTORS__", json.dumps(sectors, ensure_ascii=False))
+           .replace("__SAMPLE_PATH__", pages[0]["u"])
            .replace("__SECNAV__", secnav))
     with open(os.path.join(HERE, "index.html"), "w") as f:
         f.write(doc)
@@ -1120,8 +1123,10 @@ system fonts offline).
 ## Structure
 
 - `index.html` — filterable gallery of all {len(BRANDS)} pages
-- `<brand>.html` × {len(BRANDS)} — one landing page per product (nav, hero with fake product UI,
-  logo strip, features, how-it-works, stats band, pricing, testimonials, FAQ, CTA, footer)
+- `<sector-slug>/<brand>.html` × {len(BRANDS)} — one landing page per product (nav, hero with fake
+  product UI, logo strip, features, how-it-works, stats band, pricing, testimonials, FAQ,
+  CTA, footer), filed under one directory per sector — `fintech/`, `ai-and-automation/`, … —
+  four pages each, so the repository browses by sector instead of one flat list
 - `generate.py` — theme engine, page builder, gallery builder and this README
 - `data.py` — the original sector banks and brand list, plus the expander that
   merges the packs below into `SECTORS` / `BRANDS`

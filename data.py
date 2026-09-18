@@ -9,6 +9,8 @@ for full sectors, data6..data10 for lite sectors that borrow from archetypes.py)
 are merged into SECTORS / BRANDS by the expander.
 """
 
+import re
+
 SECTORS = {
     "Fintech": dict(
         icon="💳", accent="#6d5dfc", accent2="#22c1dc", audience="finance teams",
@@ -795,6 +797,11 @@ BRANDS = [
 
 def slugify(name: str) -> str:
     return name.lower().replace(" ", "").replace("&", "and").replace("+", "plus")
+
+def sector_slug(name: str) -> str:
+    """Directory a sector's pages live in: lowercase, hyphenated (ai-automation)."""
+    s = name.lower().replace("&", " and ").replace("+", " plus ")
+    return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
 
 # ---- expansion pack: 25 more sectors / 100 more brands (see data2.py) ----
 from data2 import EXTRA_SECTORS, EXTRA_BRANDS  # noqa: E402
