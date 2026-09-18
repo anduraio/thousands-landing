@@ -10,6 +10,7 @@ are merged into SECTORS / BRANDS by the expander.
 """
 
 import re
+import unicodedata
 
 SECTORS = {
     "Fintech": dict(
@@ -799,8 +800,9 @@ def slugify(name: str) -> str:
     return name.lower().replace(" ", "").replace("&", "and").replace("+", "plus")
 
 def sector_slug(name: str) -> str:
-    """Directory a sector's pages live in: lowercase, hyphenated (ai-automation)."""
-    s = name.lower().replace("&", " and ").replace("+", " plus ")
+    """Directory a sector's pages live in: lowercase, hyphenated (ai-and-automation)."""
+    s = unicodedata.normalize("NFKD", name.lower()).encode("ascii", "ignore").decode()
+    s = s.replace("&", " and ").replace("+", " plus ")
     return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
 
 # ---- expansion pack: 25 more sectors / 100 more brands (see data2.py) ----
