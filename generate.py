@@ -693,7 +693,7 @@ select:focus{border-color:#7c5cff}
 .count{font-size:.72rem;background:#1d2440;color:#98a0b8;border-radius:999px;padding:3px 10px;font-weight:600}
 
 /* grid view */
-.pg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(262px,1fr));gap:16px;padding:24px 0 30px}
+.pg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(262px,1fr));gap:16px;padding:24px 0 30px;align-items:start}
 .pg{position:relative;display:flex;flex-direction:column;gap:8px;background:#101529;border:1px solid #1d2440;border-radius:16px;padding:18px;cursor:pointer;transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;min-width:0}
 .pg:hover{transform:translateY(-3px);border-color:#4c5aa0;box-shadow:0 16px 40px rgba(0,0,0,.45)}
 .pg-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -701,10 +701,11 @@ select:focus{border-color:#7c5cff}
 .pg-mode{display:inline-flex;align-items:center;gap:6px;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:#6f7896;font-weight:600}
 .pg-mode i{width:8px;height:8px;border-radius:50%;display:inline-block}
 .pg h3{font-family:'Sora',sans-serif;font-size:1.05rem;margin:2px 0 0}
-.pg p{color:#98a0b8;font-size:.86rem;margin:0;flex:1}
+.pg p{color:#98a0b8;font-size:.86rem;margin:0}
 .chip{display:inline-flex;align-items:center;gap:6px;width:fit-content;font-size:.72rem;color:#b9c0d8;border:1px solid #1d2440;border-radius:999px;padding:3px 10px;background:rgba(255,255,255,.02)}
 .chip i{width:7px;height:7px;border-radius:50%;display:inline-block}
-.pg-actions{display:flex;gap:8px;margin-top:12px;opacity:0;transform:translateY(4px);transition:.18s}
+.pg-actions{display:flex;gap:8px;opacity:0;transform:translateY(-4px);transition:.18s}
+.pg-shot .pg-actions{position:absolute;top:8px;right:8px;z-index:2}
 .pg:hover .pg-actions,.pg:focus-within .pg-actions{opacity:1;transform:none}
 @media (hover:none){.pg .pg-actions{opacity:1;transform:none}}
 .act{font-size:.78rem;font-weight:600;padding:7px 12px;border-radius:8px;cursor:pointer;border:1px solid #26304f;background:#0f1428;color:#c7cde6;display:inline-flex;align-items:center;gap:6px}
@@ -732,7 +733,7 @@ select:focus{border-color:#7c5cff}
 
 /* live previews on the cards */
 .pg-shot{position:relative;overflow:hidden;aspect-ratio:16/10;border:1px solid #1d2440;border-radius:11px;background:#0b0f1d}
-.shot-inner{position:absolute;top:0;left:0;width:1280px;height:800px;transform-origin:0 0}
+.shot-inner{position:absolute;top:0;left:0;width:1280px;height:800px;transform-origin:0 0;pointer-events:none}
 .shot-frame{width:1280px;height:800px;border:0;display:block;pointer-events:none;background:#fff}
 .shot-spin{position:absolute;inset:0;display:grid;place-items:center;font-size:.72rem;color:#6f7896;background:linear-gradient(100deg,#0f1428 30%,#161e3a 50%,#0f1428 70%) 0 0/220% 100%;animation:shimmer 1.5s linear infinite}
 .pg-shot.loaded .shot-spin{display:none}
@@ -812,7 +813,7 @@ function card(p){
     </article>`;
   }
   return `<article class="pg" data-slug="${p.s}" data-name="${esc(p.n)}">
-    <div class="pg-shot" data-url="${p.u}"><div class="shot-spin">loading…</div></div>
+    <div class="pg-shot" data-url="${p.u}">${acts().replace('href="#"', `href="${p.u}"`)}<div class="shot-spin">loading…</div></div>
     <div class="pg-top">
       <span class="pg-icon" style="background:linear-gradient(135deg,${p.a},${p.a2})">${p.i}</span>
       <span class="pg-mode">${modeDot(p.m)}${p.t}</span>
@@ -820,7 +821,6 @@ function card(p){
     <h3>${esc(p.n)}</h3>
     <p>${esc(p.h)}</p>
     <span class="chip">${esc(p.k)}</span>
-    ${acts().replace('href="#"', `href="${p.u}"`)}
   </article>`;
 }
 function render(){
@@ -849,7 +849,14 @@ function syncPills(){
 const DESIGN_W = 1280, NEAR = 400, FAR = 1400;
 const live = new Set();
 function fitShot(inner, shot){
-  if (inner) inner.style.transform = `scale(${shot.clientWidth / DESIGN_W})`;
+  if (!inner) return;
+  const w = shot.clientWidth, h = shot.clientHeight;
+  if (!w || !h) return;
+  const s = w / DESIGN_W;
+  inner.style.transform = `scale(${s})`;
+  const f = inner.querySelector('.shot-frame');
+  /* tall enough that the page fills the box to its last pixel */
+  if (f) f.style.height = Math.max(800, Math.ceil(h / s)) + 'px';
 }
 /* A card has no frame until it comes near the viewport, and loses it once it is
    far away: 1500 documents would sink the renderer, so a preview exists only
